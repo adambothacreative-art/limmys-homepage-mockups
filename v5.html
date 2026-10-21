@@ -1,0 +1,788 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<style>:root{color-scheme:light;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0;font:14px system-ui,sans-serif}img{max-width:100%}[hidden]{display:none!important}</style>
+</head>
+<body>
+<title>Limmys UK Homepage v5</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Jost:wght@400;500;600&family=Raleway:wght@600;700;800&display=swap">
+<style>
+/* Layout: premium storefront. Real shoot photography carries the mood (hero, category tiles, family strip);
+   clean packshots carry the shopping (best sellers, wave collections, spotlight). Navy + white base, brand aqua as a soft tint,
+   teal only as a small accent. Graphics kept to a few line-art palms.
+   Single light look on purpose: this mocks the live store, which has no dark mode. */
+:root {
+  color-scheme: light;
+  --navy: #142f5f;
+  --navy-deep: #0d2147;
+  --teal: #1bbfa2;
+  --teal-ink: #0b7a68;
+  --ink: #1b2740;
+  --muted: #5a667c;
+  --line: #e1e6ee;
+  --paper: #ffffff;
+  --mist: #f2f5f8;
+  --aqua: #e3f3ef;
+  --blue-tint: #e4eefa;
+  --pink-tint: #fbe8ef;
+  --sun: #f6b73c;
+  --sky: #dbeeff;
+  --butter: #fff1bd;
+  --pinkt: #ffe2ee;
+  --lilac: #ebe5ff;
+  --mintt: #dcf5ee;
+  --coral: #ffe2d3;
+  --beach-sky: #e3f5f7;
+  --beach-sea: #a6e0dc;
+  --beach-sea2: #7fd0c9;
+  --beach-sand: #f7e8c9;
+  --note: #fff6c9;
+  --note-line: #d6a400;
+  --display: "Raleway", "Avenir Next", "Segoe UI", sans-serif;
+  --body: "Jost", "Futura", "Century Gothic", "Segoe UI", sans-serif;
+  --r: 14px;
+  --wrap: 1280px;
+}
+* { box-sizing: border-box; }
+body { background: var(--paper); color: var(--ink); font-family: var(--body); font-size: 16px; line-height: 1.55; overflow-x: hidden; }
+h1, h2, h3 { font-family: var(--display); color: var(--navy); margin: 0; text-wrap: balance; line-height: 1.12; letter-spacing: -.015em; }
+p { margin: 0; }
+a { color: inherit; }
+button { font: inherit; cursor: pointer; }
+:focus-visible { outline: 3px solid var(--teal); outline-offset: 3px; border-radius: 6px; }
+.wrap { max-width: var(--wrap); margin: 0 auto; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+.gfx { position: absolute; pointer-events: none; }
+img.p { display: block; max-width: 100%; height: auto; filter: drop-shadow(0 12px 14px rgba(20, 47, 95, .14)); }
+.eyebrow { font-weight: 500; font-size: 12.5px; letter-spacing: .18em; text-transform: uppercase; color: var(--teal-ink); }
+.stars { color: var(--sun); letter-spacing: 1px; }
+
+/* ---------- Review chrome (not part of the store) ---------- */
+.review { background: #2a2f3a; color: #e8eaf0; font-size: 13.5px; }
+.review .wrap { display: flex; flex-wrap: wrap; gap: 8px 18px; align-items: center; padding-block: 9px; }
+.review strong { color: #fff; font-weight: 600; }
+.review .sp { flex: 1; }
+.toggle { background: transparent; color: #fff; border: 1px solid rgba(255,255,255,.4); border-radius: 999px; padding: 4px 12px; font-size: 13px; }
+.toggle[aria-pressed="true"] { background: var(--note); color: var(--ink); border-color: var(--note); }
+.tbc { display: inline-block; border: 1.5px dashed var(--note-line); background: var(--note); color: #6b5200; border-radius: 6px; padding: 0 5px; font-size: .86em; font-weight: 500; line-height: 1.45; white-space: nowrap; }
+.note { display: none; position: relative; z-index: 3; max-width: 680px; margin: 0 0 18px; background: var(--note); border: 1.5px dashed var(--note-line); border-radius: 10px; padding: 9px 13px; font-size: 14px; color: #4a3b00; line-height: 1.45; }
+.note b { color: #2e2500; }
+.notes-on .note { display: block; }
+
+/* ---------- Utility bar + header ---------- */
+.utility { background: var(--navy-deep); color: #dfe7f6; font-size: 13.5px; }
+.utility .wrap { display: grid; grid-template-columns: 1fr auto 1fr; gap: 12px; align-items: center; padding-block: 8px; }
+.utility .msg { text-align: center; font-weight: 500; color: #fff; }
+.utility .msg span { color: var(--teal); }
+.utility .r { justify-self: end; display: flex; gap: 18px; }
+.utility a { text-decoration: none; }
+.utility a:hover { color: #fff; }
+header.site { background: var(--paper); border-bottom: 1px solid var(--line); position: sticky; top: env(safe-area-inset-top, 0px); z-index: 20; }
+header.site .wrap { display: flex; align-items: center; gap: 30px; padding-block: 16px; }
+.logo img { height: 38px; width: auto; display: block; }
+nav.main { display: flex; gap: 26px; font-weight: 500; font-size: 15.5px; }
+nav.main a { text-decoration: none; padding: 6px 0; border-bottom: 2px solid transparent; white-space: nowrap; }
+nav.main a:hover { border-color: var(--teal); }
+.hdr-r { margin-left: auto; display: flex; gap: 8px; align-items: center; }
+.search { display: flex; align-items: center; gap: 8px; border: 1px solid var(--line); background: var(--mist); border-radius: 999px; padding: 8px 14px; width: 250px; color: var(--muted); font-size: 14.5px; }
+.search svg { width: 18px; height: 18px; flex: none; color: var(--navy); }
+.search input { border: 0; background: transparent; font: inherit; color: var(--ink); width: 100%; min-width: 0; outline: none; }
+.icon-btn { width: 42px; height: 42px; display: grid; place-items: center; border-radius: 50%; border: 0; background: transparent; color: var(--navy); position: relative; }
+.icon-btn:hover { background: var(--mist); }
+.icon-btn svg { width: 22px; height: 22px; }
+.bag-count { position: absolute; top: 4px; right: 2px; min-width: 18px; height: 18px; border-radius: 9px; background: var(--teal); color: var(--navy-deep); font-size: 11px; font-weight: 600; display: grid; place-items: center; padding: 0 4px; }
+.menu-btn { display: none; }
+
+/* ---------- Hero ---------- */
+.hero { background: var(--beach-sky); position: relative; overflow: hidden; }
+.hero .scene { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 0; }
+.hero-grid { position: relative; z-index: 2; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 24px; align-items: center; padding-block: 34px 30px; }
+.hero-copy { display: grid; align-content: center; gap: 16px; min-width: 0; }
+.hero-art { position: relative; width: 100%; max-width: 560px; aspect-ratio: 1 / .74; justify-self: center; }
+.hero-art .sunD { position: absolute; width: 58%; aspect-ratio: 1; left: 22%; top: 2%; border-radius: 50%; background: #ffe7a3; }
+.hero-art img.p { position: absolute; }
+.hero-art .v1 { width: 33%; left: 34%; top: 4%; z-index: 3; }
+.hero-art .v2 { width: 25%; left: 15%; top: 14%; z-index: 2; transform: rotate(-9deg); }
+.hero-art .v3 { width: 25%; right: 14%; top: 16%; z-index: 2; transform: rotate(8deg); }
+.hero-art .a1 { width: 27%; left: 6%; bottom: 2%; z-index: 4; transform: rotate(-8deg); }
+.hero-art .a2 { width: 25%; right: 6%; bottom: 4%; z-index: 4; transform: rotate(7deg); }
+.hero-art .g1 { width: 22%; left: 40%; bottom: 0; z-index: 5; transform: rotate(-4deg); }
+.badge-r { position: absolute; right: 0; top: 0; z-index: 6; width: 92px; aspect-ratio: 1; border-radius: 50%; background: var(--navy); color: #fff; display: grid; place-items: center; text-align: center; font-family: var(--display); font-weight: 700; font-size: 12.5px; line-height: 1.2; transform: rotate(8deg); box-shadow: 0 0 0 4px rgba(255,255,255,.8); }
+.badge-r small { display: block; font-family: var(--body); font-weight: 500; font-size: 11px; color: #ffd36b; }
+.hero h1 { font-size: clamp(32px, 3.8vw, 52px); font-weight: 800; }
+.hero .sub { font-size: 18px; color: var(--muted); max-width: 30em; }
+.ctas { display: flex; flex-wrap: wrap; gap: 12px; }
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; border-radius: 10px; padding: 13px 24px; font-weight: 600; font-size: 15.5px; text-decoration: none; border: 1.5px solid var(--navy); transition: background-color .15s ease, color .15s ease; }
+.btn.solid { background: var(--navy); color: #fff; }
+.btn.solid:hover { background: var(--navy-deep); }
+.btn.ghost { background: transparent; color: var(--navy); }
+.btn.ghost:hover { background: var(--paper); }
+.trust { display: flex; flex-wrap: wrap; gap: 8px 20px; font-size: 14.5px; color: var(--ink); align-items: center; padding-top: 6px; border-top: 1px solid rgba(20,47,95,.12); }
+.trust > span { display: inline-flex; align-items: center; gap: 6px; }
+
+/* ---------- Generic section ---------- */
+section.s { padding-block: 64px; position: relative; }
+.s-head { display: flex; justify-content: space-between; align-items: end; gap: 12px 24px; flex-wrap: wrap; margin-bottom: 26px; }
+.s-head h2 { font-size: clamp(26px, 3vw, 36px); font-weight: 700; margin-top: 6px; }
+.s-head p { color: var(--muted); font-size: 17px; margin-top: 6px; }
+.link { color: var(--navy); font-weight: 600; text-decoration: none; border-bottom: 1.5px solid var(--teal); padding-bottom: 2px; white-space: nowrap; }
+
+/* ---------- Category tiles (photos) ---------- */
+.cats { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 18px; }
+.cat { text-decoration: none; display: grid; gap: 10px; align-content: start; min-width: 0; border-radius: 18px; padding: 10px 10px 16px; transition: transform .2s ease; }
+.cat:hover { transform: translateY(-3px); }
+.cat h3, .cat .meta { padding-inline: 6px; }
+.cat .ph { border-radius: 12px; overflow: hidden; aspect-ratio: 4 / 5; max-width: 100%; background: var(--mist); }
+.bg-sky { background: var(--sky); } .bg-butter { background: var(--butter); } .bg-pink { background: var(--pinkt); }
+.bg-lilac { background: var(--lilac); } .bg-mint { background: var(--mintt); } .bg-coral { background: var(--coral); }
+.cat .ph img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .4s ease; }
+.cat:hover .ph img { transform: scale(1.05); }
+.cat h3 { font-family: var(--body); font-size: 17px; font-weight: 600; color: var(--ink); letter-spacing: 0; }
+.cat .meta { font-size: 14px; color: var(--muted); margin-top: -8px; }
+
+/* ---------- Product cards ---------- */
+.grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 26px 22px; }
+.card { display: grid; grid-template-rows: auto 1fr; gap: 14px; min-width: 0; }
+.card .ph { position: relative; border-radius: var(--r); aspect-ratio: 1 / 1.05; overflow: hidden; background: var(--mist); display: grid; place-items: center; transition: background-color .25s ease; }
+.card .ph .gfx.palm { width: 64px; right: 10px; top: 10px; color: rgba(255,255,255,.75); z-index: 0; }
+.card .ph img.p { max-height: 74%; max-width: 74%; width: auto; position: relative; z-index: 1; }
+.card .ph img.model { position: absolute; left: 50%; bottom: 0; transform: translateX(-50%); height: 88%; width: auto; max-width: none; mix-blend-mode: multiply; z-index: 1; }
+.card .ph img.model.wide { height: auto; width: 86%; bottom: 38%; }
+.card .ph .alt { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity .35s ease; z-index: 2; }
+.card:hover .ph .alt { opacity: 1; }
+.badge { position: absolute; left: 12px; top: 12px; z-index: 3; background: var(--paper); color: var(--navy); font-weight: 600; font-size: 12px; letter-spacing: .04em; border-radius: 6px; padding: 4px 9px; }
+.badge.dark { background: var(--navy); color: #fff; }
+.card .body { display: grid; gap: 6px; align-content: start; }
+.card h3 { font-family: var(--body); font-size: 17px; font-weight: 600; color: var(--ink); line-height: 1.3; letter-spacing: 0; }
+.card .feat { font-size: 14px; color: var(--muted); }
+.card .row { display: flex; align-items: center; justify-content: space-between; gap: 8px; flex-wrap: wrap; }
+.price { font-weight: 600; font-size: 17px; color: var(--navy); font-variant-numeric: tabular-nums; }
+.rating { font-size: 13px; color: var(--muted); display: inline-flex; gap: 5px; align-items: center; }
+.swatches { display: flex; flex-wrap: wrap; gap: 7px; min-height: 24px; align-items: center; }
+.sw-btn { width: 20px; height: 20px; border-radius: 50%; border: 2px solid var(--paper); box-shadow: 0 0 0 1px #c9d2df; padding: 0; }
+.sw-btn[aria-pressed="true"] { box-shadow: 0 0 0 1.5px var(--navy); }
+.sw-label { font-size: 13px; color: var(--muted); margin-left: 2px; }
+.add { margin-top: 4px; width: 100%; border-radius: 10px; border: 1.5px solid var(--navy); background: var(--paper); color: var(--navy); font-weight: 600; padding: 10px 14px; transition: background-color .15s ease, color .15s ease; }
+.add:hover { background: var(--navy); color: #fff; }
+.sizes { display: flex; gap: 6px; }
+.sizes button { flex: 1; border: 1px solid var(--line); background: var(--paper); border-radius: 8px; padding: 6px 0; font-weight: 600; font-size: 13.5px; color: var(--ink); line-height: 1.2; }
+.sizes button small { display: block; font-weight: 400; font-size: 11.5px; color: var(--muted); }
+.sizes button:hover { border-color: var(--navy); }
+
+/* ---------- Wave collections ---------- */
+.waves { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+.wave-tile { position: relative; border-radius: 18px; overflow: hidden; min-height: 320px; text-decoration: none; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr); align-items: center; padding: 30px; gap: 10px; }
+.wave-tile.blue { background: var(--blue-tint); }
+.wave-tile.pinky { background: var(--pink-tint); }
+.wave-tile .gfx.wv { left: 0; right: 0; bottom: 0; width: 100%; height: 46%; }
+.wave-tile.blue .wv { color: #d3e3f6; } .wave-tile.pinky .wv { color: #f6d6e2; }
+.wave-tile .txt { position: relative; z-index: 2; display: grid; gap: 8px; align-content: center; min-width: 0; }
+.wave-tile h3 { font-size: clamp(26px, 2.8vw, 34px); font-weight: 800; }
+.wave-tile .txt p { color: var(--muted); font-size: 15.5px; }
+.wave-tile .btn { justify-self: start; margin-top: 8px; padding: 10px 20px; }
+.wave-tile .pile { position: relative; z-index: 2; height: 250px; }
+.pile img.p { position: absolute; }
+.pile .i1 { width: 42%; left: 6%; top: 2%; transform: rotate(-7deg); }
+.pile .i2 { width: 42%; left: 48%; top: 0; transform: rotate(6deg); }
+.pile .i3 { width: 48%; left: 4%; bottom: 0; transform: rotate(-3deg); z-index: 3; }
+.pile .i4 { width: 38%; right: 2%; bottom: 4%; transform: rotate(7deg); z-index: 3; }
+
+/* ---------- Spotlight ---------- */
+.spot { background: var(--sky); border-radius: 22px; display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); gap: 28px; align-items: center; padding: 36px; position: relative; overflow: hidden; }
+.spot-art { position: relative; aspect-ratio: 1 / .92; min-width: 0; max-width: 100%; }
+.spot-art .disc { position: absolute; width: 62%; aspect-ratio: 1; left: 19%; top: 8%; border-radius: 50%; background: var(--paper); }
+.spot-art img.p { position: absolute; width: 38%; left: 31%; top: 9%; z-index: 2; }
+.spot-art .inset { position: absolute; left: 0; bottom: 0; width: 36%; border-radius: 12px; border: 4px solid var(--paper); box-shadow: 0 10px 24px rgba(13,33,71,.18); z-index: 4; display: block; }
+.callout { position: absolute; z-index: 3; background: var(--paper); border-radius: 12px; padding: 9px 13px; font-size: 14px; line-height: 1.3; max-width: 40%; box-shadow: 0 6px 18px rgba(20,47,95,.10); }
+.callout b { display: block; font-weight: 600; color: var(--navy); font-size: 14.5px; margin-bottom: 2px; }
+.callout .dot { position: absolute; width: 10px; height: 10px; border-radius: 50%; background: var(--teal); border: 2px solid var(--paper); box-shadow: 0 0 0 1px var(--teal); }
+.co1 { left: 0; top: 6%; } .co1 .dot { right: -16px; top: 16px; }
+.co2 { right: 0; top: 18%; } .co2 .dot { left: -16px; top: 16px; }
+.co3 { left: 0; top: 40%; } .co3 .dot { right: -16px; top: 14px; }
+.co4 { right: 1%; bottom: 8%; } .co4 .dot { left: -16px; top: 14px; }
+.spot .copy { display: grid; gap: 16px; position: relative; z-index: 2; min-width: 0; }
+.spot h2 { font-size: clamp(28px, 3.2vw, 40px); font-weight: 800; }
+.spot .copy > p { font-size: 17px; color: var(--ink); max-width: 34em; }
+.spot .sizes { max-width: 380px; }
+.spot .price { font-size: 22px; }
+.safety { display: flex; gap: 10px; align-items: start; font-size: 14px; color: var(--muted); background: var(--paper); border-radius: 10px; padding: 10px 12px; max-width: 34em; }
+.safety svg { flex: none; width: 20px; height: 20px; color: var(--navy); margin-top: 1px; }
+.swatch-strip { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
+
+/* ---------- Real families ---------- */
+.mosaic { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); grid-auto-rows: 230px; gap: 14px; }
+.tile { position: relative; border-radius: var(--r); overflow: hidden; background: var(--mist); }
+.tile img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .4s ease; }
+.tile:hover img { transform: scale(1.04); }
+.tile.big { grid-column: span 2; grid-row: span 2; }
+.tile .tag { position: absolute; left: 12px; bottom: 12px; background: rgba(255,255,255,.94); color: var(--navy); border-radius: 8px; padding: 6px 10px; font-size: 13.5px; font-weight: 600; display: inline-flex; gap: 6px; align-items: center; }
+.tile .tag::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: var(--teal); }
+
+/* ---------- Tenets ---------- */
+.tenets { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 28px; }
+.tenet { display: grid; gap: 8px; align-content: start; }
+.tenet .ic { width: 60px; height: 60px; border-radius: 50%; display: grid; place-items: center; background: var(--aqua); }
+.tenet .ic svg { width: 28px; height: 28px; color: var(--navy); }
+.tenet h3 { font-size: 18.5px; font-weight: 700; }
+.tenet p { color: var(--muted); font-size: 15.5px; }
+.tenet a { font-size: 14.5px; font-weight: 600; color: var(--teal-ink); text-decoration: none; }
+.awards { margin-top: 40px; padding-top: 28px; border-top: 1px solid var(--line); display: flex; flex-wrap: wrap; gap: 10px 28px; align-items: center; justify-content: center; color: var(--muted); font-size: 14.5px; }
+.awards span { display: inline-flex; gap: 8px; align-items: center; }
+.awards span::before { content: "★"; color: var(--sun); }
+
+/* ---------- Reviews ---------- */
+.reviews { background: var(--mintt); border-radius: 22px; padding: 40px 36px; }
+.rev-sum { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 18px; margin-bottom: 24px; }
+.rev-sum .big { font-family: var(--display); font-weight: 800; font-size: 44px; color: var(--navy); line-height: 1; }
+.rev-sum .stars { font-size: 20px; }
+.rev-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+.rev { background: var(--paper); border-radius: 14px; padding: 18px; display: grid; gap: 10px; align-content: start; min-width: 0; }
+.rev .prod { display: flex; gap: 10px; align-items: center; font-size: 14px; color: var(--muted); }
+.rev .prod img { width: 44px; height: 44px; object-fit: cover; border-radius: 8px; }
+.rev .ph-line { height: 10px; border-radius: 5px; background: #e8edf3; }
+.rev .ph-line.s { width: 62%; }
+.rev .who { font-size: 13px; color: var(--muted); }
+
+/* ---------- Swim club ---------- */
+.club { background: var(--navy); color: #fff; border-radius: 22px; overflow: hidden; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, .9fr); position: relative; }
+.club .in { padding: 44px 40px; display: grid; gap: 18px; align-content: center; position: relative; }
+.club h2 { color: #fff; font-size: clamp(26px, 2.8vw, 34px); font-weight: 800; }
+.club p { color: #cfd9ee; font-size: 17px; max-width: 30em; }
+.club form { display: grid; grid-template-columns: 1.4fr 1fr; gap: 10px; position: relative; z-index: 2; }
+.club input, .club select { font: inherit; font-size: 16px; padding: 13px 16px; border-radius: 10px; border: 0; background: #fff; color: var(--ink); min-width: 0; }
+.club form .btn { grid-column: 1 / -1; background: var(--teal); border-color: var(--teal); color: var(--navy-deep); }
+.club .fine { grid-column: 1 / -1; font-size: 13px; color: #a9b8d6; margin: 0; }
+.club .ok { grid-column: 1 / -1; color: var(--teal); font-weight: 600; }
+.club .photo { position: relative; min-height: 300px; }
+.club .photo img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; }
+.club .gfx.palm { width: 120px; right: 10px; bottom: -10px; color: rgba(255,255,255,.06); }
+
+/* ---------- Safety + footer ---------- */
+.safety-band { border-top: 1px solid var(--line); }
+.safety-band .wrap { display: flex; gap: 12px; align-items: center; justify-content: center; padding-block: 18px; font-size: 15px; color: var(--ink); text-align: center; }
+.safety-band svg { width: 22px; height: 22px; color: var(--teal-ink); flex: none; }
+footer.site { background: var(--navy-deep); color: #c9d4ea; font-size: 14.5px; }
+footer.site .wrap { display: grid; grid-template-columns: 1.3fr repeat(3, 1fr); gap: 28px; padding-block: 44px 28px; }
+footer.site h4 { color: #fff; font-family: var(--display); font-size: 15px; margin: 0 0 10px; }
+footer.site ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; }
+footer.site a { text-decoration: none; }
+footer.site a:hover { color: #fff; }
+footer.site .logo img { filter: brightness(0) invert(1); height: 32px; }
+footer.site .base { grid-column: 1 / -1; border-top: 1px solid #223a6b; padding-top: 18px; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 10px; font-size: 13px; color: #94a5c7; }
+
+/* ---------- Open items (review chrome) ---------- */
+.open { background: #f5f6f8; border-top: 1px solid var(--line); }
+.open .wrap { padding-block: 36px 44px; display: grid; gap: 14px; }
+.open h2 { font-size: 22px; }
+.open ol { margin: 0; padding-left: 22px; display: grid; gap: 8px; }
+.open li { padding-left: 4px; }
+.open .cols { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; }
+.open h3 { font-family: var(--body); font-size: 16px; font-weight: 600; color: var(--navy); margin-bottom: 6px; letter-spacing: 0; }
+
+.toast { position: fixed; left: 50%; bottom: calc(22px + env(safe-area-inset-bottom, 0px)); transform: translate(-50%, 20px); background: var(--navy); color: #fff; padding: 11px 18px; border-radius: 10px; font-weight: 500; font-size: 14.5px; opacity: 0; transition: opacity .2s ease, transform .2s ease; z-index: 40; pointer-events: none; }
+.toast.show { opacity: 1; transform: translate(-50%, 0); }
+
+/* ---------- Responsive ---------- */
+@media (max-width: 1180px) {
+  .search { width: 180px; }
+  nav.main { gap: 18px; font-size: 15px; }
+  .cats { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+@media (max-width: 980px) {
+  nav.main, .search, .utility .l, .utility .r { display: none; }
+  .utility .wrap { grid-template-columns: 1fr; }
+  .menu-btn { display: grid; }
+  .hero-grid { grid-template-columns: 1fr; padding-block: 24px 20px; }
+  .hero-art { max-width: 440px; }
+  .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 22px 14px; }
+  .waves { grid-template-columns: 1fr; }
+  .spot { grid-template-columns: 1fr; padding: 24px; }
+  .mosaic { grid-template-columns: repeat(2, minmax(0, 1fr)); grid-auto-rows: 170px; }
+  .tenets { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .rev-grid { grid-template-columns: 1fr; }
+  .club { grid-template-columns: 1fr; }
+  .club .photo { order: -1; min-height: 220px; }
+  .club .in { padding: 28px 22px; }
+  footer.site .wrap { grid-template-columns: 1fr 1fr; }
+  .open .cols { grid-template-columns: 1fr; }
+}
+@media (max-width: 560px) {
+  .cats { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px 12px; }
+  .wave-tile { grid-template-columns: 1fr; padding: 22px; }
+  .wave-tile .pile { height: 200px; width: 100%; max-width: 300px; justify-self: center; }
+  .callout { font-size: 12.5px; padding: 7px 10px; max-width: 46%; }
+  .callout b { font-size: 13px; }
+  .tenets { grid-template-columns: 1fr; }
+  .club form { grid-template-columns: 1fr; }
+  .reviews { padding: 28px 20px; }
+  .hdr-r .hide-sm { display: none; }
+  .badge-r { width: 74px; font-size: 11px; }
+}
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+
+/* ---------- v4 hero: kids cut-out standing in the sea ---------- */
+.hero-grid { z-index: auto; padding-block: 26px 0; min-height: 470px; align-items: stretch; }
+.hero-copy { position: relative; z-index: 3; padding-bottom: 104px; }
+.kids { position: relative; z-index: 1; align-self: end; justify-self: center; width: 100%; max-width: 640px; }
+.kids img { display: block; width: 100%; height: auto; filter: drop-shadow(0 10px 18px rgba(13, 33, 71, .18)); }
+.kids .badge-r { right: 2%; top: 4%; }
+.front { position: absolute; left: 0; right: 0; bottom: 0; width: 100%; height: 132px; z-index: 2; pointer-events: none; }
+@media (max-width: 980px) {
+  .hero-grid { min-height: 0; padding-block: 22px 0; }
+  .hero-copy { padding-bottom: 8px; }
+  .kids { max-width: 460px; }
+  .front { height: 92px; }
+}
+
+/* ---------- v5 hero: full photo on the right, cropped by a wave ---------- */
+.hero5 { position: relative; overflow: hidden; height: 480px; background: var(--beach-sky); }
+.h5-photo { position: absolute; top: 0; right: 0; bottom: 0; width: min(60%, 880px); }
+.h5-photo img { width: 100%; height: 100%; object-fit: cover; object-position: 55% 35%; display: block; }
+.h5-photo .badge-r { right: 3%; top: 7%; }
+.h5-panel { position: absolute; top: 0; bottom: 0; left: 0; width: calc(100% - min(60%, 880px) + 2px); background: var(--beach-sky); z-index: 2; }
+.h5-wave { position: absolute; top: 0; left: calc(100% - 1px); height: 100%; width: 96px; }
+.h5-wave-m { display: none; }
+.h5-panel .gfx.palm { width: 150px; left: -24px; bottom: -18px; color: rgba(27, 191, 162, .18); }
+.h5-copy { position: relative; z-index: 3; height: 100%; display: grid; align-content: center; gap: 16px; max-width: 620px;
+  padding-left: max(16px, env(safe-area-inset-left, 0px), calc((100vw - var(--wrap)) / 2 + 16px)); padding-right: 24px; box-sizing: content-box; }
+.h5-copy h1 { font-size: clamp(32px, 3.6vw, 50px); font-weight: 800; }
+.h5-copy .sub { font-size: 18px; color: var(--muted); max-width: 30em; }
+@media (max-width: 980px) {
+  .hero5 { height: auto; display: flex; flex-direction: column; }
+  .h5-photo { position: relative; width: 100%; height: 300px; }
+  .h5-panel { position: relative; width: 100%; }
+  .h5-wave { display: none; }
+  .h5-wave-m { display: block; position: absolute; left: 0; top: -38px; width: 100%; height: 40px; }
+  .h5-copy { padding: 10px max(16px, env(safe-area-inset-right, 0px)) 30px max(16px, env(safe-area-inset-left, 0px)); max-width: none; box-sizing: border-box; }
+}
+</style>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="palm" viewBox="0 0 120 160"><path d="M58 158 C56 122 60 92 66 62" fill="none" stroke="currentColor" stroke-width="7" stroke-linecap="round"/><g fill="currentColor"><path d="M66 62 C50 40 26 34 6 44 C28 42 46 48 66 62Z"/><path d="M66 62 C60 36 66 16 84 4 C76 22 72 40 66 62Z"/><path d="M66 62 C82 42 104 38 118 50 C98 48 84 52 66 62Z"/><path d="M66 62 C44 58 26 70 18 88 C34 74 48 68 66 62Z"/><path d="M66 62 C86 60 104 72 110 92 C96 78 82 70 66 62Z"/></g></symbol>
+  <symbol id="wave" viewBox="0 0 1200 80" preserveAspectRatio="none"><path fill="currentColor" d="M0 40 C150 0 300 80 450 40 S750 0 900 40 S1100 80 1200 40 V80 H0Z"/></symbol>
+  <symbol id="shield" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" d="M12 3l7 3v5c0 4.5-3 8.3-7 10-4-1.7-7-5.5-7-10V6l7-3z"/><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" d="M8.8 12.2l2.2 2.2 4.4-4.6"/></symbol>
+</svg>
+
+<div class="review" id="top">
+  <div class="wrap">
+    <span><strong>Limmys UK homepage mockup</strong> · draft v5 · 21 Oct 2026 · for review, not live</span>
+    <span class="sp"></span>
+    <span><span class="tbc">£70</span> = confirm before live</span>
+    <button class="toggle" id="notesToggle" type="button" aria-pressed="true">Review notes: on</button>
+  </div>
+</div>
+
+<div class="utility"><div class="wrap">
+  <span class="l">United Kingdom · £ GBP</span>
+  <span class="msg" id="annMsg">Free UK delivery over <span>£70</span></span>
+  <span class="r"><a href="#top">Wholesale</a><a href="#top">Help</a></span>
+</div></div>
+
+<header class="site">
+  <div class="wrap">
+    <a class="logo" href="#top" aria-label="Limmys home"><img src="img/logo.png" alt="Limmys" width="108" height="38"></a>
+    <nav class="main" aria-label="Main">
+      <a href="#shop">Swim vests</a>
+      <a href="#shop">Arm bands</a>
+      <a href="#shop">Caps and goggles</a>
+      <a href="#waves">Collections</a>
+      <a href="#bestsellers">Best sellers</a>
+      <a href="#why">Our story</a>
+    </nav>
+    <div class="hdr-r">
+      <label class="search" for="q"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg><input id="q" type="search" placeholder="Search vests, caps, goggles"></label>
+      <button class="icon-btn hide-sm" type="button" aria-label="Account"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c1.5-4 4.5-6 8-6s6.5 2 8 6"/></svg></button>
+      <button class="icon-btn" type="button" aria-label="Basket"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M5 8h14l-1.2 11.2a2 2 0 0 1-2 1.8H8.2a2 2 0 0 1-2-1.8L5 8z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg><span class="bag-count" id="bagCount">0</span></button>
+      <button class="icon-btn menu-btn" type="button" aria-label="Menu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+    </div>
+  </div>
+</header>
+
+<main>
+<!-- 1. HERO -->
+<section class="hero5">
+  <div class="h5-photo">
+    <img src="img/hero_photo.webp" alt="Four children by a pool wearing Limmys swim vests, swim caps, goggles and arm bands" fetchpriority="high">
+    <div class="badge-r"><span>Award-<br>winning<small>swim aids</small></span></div>
+  </div>
+  <div class="h5-panel">
+    <svg class="gfx palm"><use href="#palm"/></svg>
+    <svg class="h5-wave" viewBox="0 0 96 480" preserveAspectRatio="none" aria-hidden="true">
+      <path d="M0 0 H34 C86 70 14 140 52 220 S92 340 40 400 S30 460 46 480 H0Z" fill="var(--beach-sky)"/>
+      <path d="M34 0 C86 70 14 140 52 220 S92 340 40 400 S30 460 46 480" fill="none" stroke="#ffffff" stroke-width="10" vector-effect="non-scaling-stroke" opacity=".9"/>
+      <path d="M46 0 C98 70 26 140 64 220 S104 340 52 400 S42 460 58 480" fill="none" stroke="#1bbfa2" stroke-width="3" vector-effect="non-scaling-stroke"/>
+    </svg>
+    <svg class="h5-wave-m" viewBox="0 0 400 40" preserveAspectRatio="none" aria-hidden="true">
+      <path d="M0 22 C60 2 120 38 200 18 S330 4 400 20 V40 H0Z" fill="var(--beach-sky)"/>
+      <path d="M0 22 C60 2 120 38 200 18 S330 4 400 20" fill="none" stroke="#ffffff" stroke-width="6" vector-effect="non-scaling-stroke"/>
+      <path d="M0 15 C60 -5 120 31 200 11 S330 -3 400 13" fill="none" stroke="#1bbfa2" stroke-width="3" vector-effect="non-scaling-stroke"/>
+    </svg>
+    <div class="h5-copy">
+      <div class="note"><b>1. Hero (v5).</b> The full Signature listing photo fills the right of the banner, with the text banner cropped off the top and a wavy edge where it meets the copy panel. The crop stops above one child's character-print swim shorts.</div>
+      <span class="eyebrow">Swim aids and accessories</span>
+      <h1>Everything they need to learn to swim</h1>
+      <p class="sub">Swim vests, arm bands, caps and goggles for kids who are learning. Swim caps for the grown-ups swimming with them.</p>
+      <div class="ctas">
+        <a class="btn solid" href="#shop">Shop swim aids</a>
+        <a class="btn ghost" href="#shop">Shop accessories</a>
+      </div>
+      <div class="trust">
+        <span><span class="stars">★★★★★</span> <span class="tbc">4.8</span> from <span class="tbc">31,067</span> reviews</span>
+        <span>Award-winning</span>
+        <span>30-day returns</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 2. SHOP BY CATEGORY -->
+<section class="s" id="shop">
+  <div class="wrap">
+    <div class="note"><b>2. Shop by category (v4).</b> Same photos as the current homepage tiles, in pastel cards. Signature vests get their own "New" tile (it was "New Arrivals" on the live site). Headbands move to best sellers only, as there is no headband photo on the current homepage.</div>
+    <div class="s-head">
+      <div><span class="eyebrow">Shop by category</span><h2>Kit for every stage of learning to swim</h2></div>
+    </div>
+    <div class="cats">
+      <a class="cat bg-sky" href="#bestsellers"><div class="ph"><img src="img/c_vests.webp" alt="Two children by a pool in Classic swim vests"></div><h3>Swim vests</h3><span class="meta">11 styles · £29.99</span></a>
+      <a class="cat bg-coral" href="#bestsellers"><div class="ph"><img src="img/c_signature.webp" alt="Two children by a pool in Signature swim vests"></div><h3>New: Signature vests</h3><span class="meta">4 colours · £29.99</span></a>
+      <a class="cat bg-butter" href="#bestsellers"><div class="ph"><img src="img/c_armbands.webp" alt="Children at the pool edge wearing arm bands"></div><h3>Arm bands</h3><span class="meta">6 prints · £9.99</span></a>
+      <a class="cat bg-pink" href="#bestsellers"><div class="ph"><img src="img/c_kidscaps.webp" alt="Two girls on a pebble beach in swim caps"></div><h3>Kids swim caps</h3><span class="meta">Short and long hair · from £8.99</span></a>
+      <a class="cat bg-lilac" href="#bestsellers"><div class="ph"><img src="img/c_goggles.webp" alt="Girl on the beach in a swim cap and goggles"></div><h3>Kids goggles</h3><span class="meta">2 colours · £9.99</span></a>
+      <a class="cat bg-mint" href="#bestsellers"><div class="ph"><img src="img/c_adultcaps.webp" alt="Two adults in a pool wearing swim caps"></div><h3>Grown-up caps</h3><span class="meta">Short and long hair · £9.99</span></a>
+    </div>
+  </div>
+</section>
+
+<!-- 3. BEST SELLERS -->
+<section class="s" id="bestsellers" style="padding-top:8px">
+  <div class="wrap">
+    <div class="note"><b>3. Best sellers.</b> Pastel cards matched to each colour, packshots for vests and arm bands, and model shots sitting flush on the card edge for caps and goggles. Hover a card to see the product in use. Colour dots swap the image (LinkedOption app). Vests pick a size on the card.</div>
+    <div class="s-head">
+      <div><span class="eyebrow">Best sellers</span><h2>The kit Limmys families come back for</h2></div>
+      <a class="link" href="#bestsellers">Shop all best sellers</a>
+    </div>
+    <div class="grid" id="productGrid"></div>
+  </div>
+</section>
+
+<!-- 4. WAVE COLLECTIONS -->
+<section class="s" id="waves" style="padding-top:8px">
+  <div class="wrap">
+    <div class="note"><b>4. Blue Wave and Pink Wave.</b> The colour-led alternative to Boys and Girls, kept from the current site. Softer tints in v2 and packshots only. Both are full collections today (8 and 10 products).</div>
+    <div class="waves">
+      <a class="wave-tile blue" href="#waves">
+        <svg class="gfx wv"><use href="#wave"/></svg>
+        <div class="txt"><span class="eyebrow">Collection</span><h3>Blue Wave</h3><p>Ocean blues and sunny yellows. 8 pieces, from vests to goggles.</p><span class="btn solid">Shop Blue Wave</span></div>
+        <div class="pile"><img class="p i1" src="img/vest_navy.webp" alt=""><img class="p i2" src="img/vest_sunshine.webp" alt=""><img class="p i3" src="img/arm_yellow.webp" alt=""><img class="p i4" src="img/vest_royal.webp" alt=""></div>
+      </a>
+      <a class="wave-tile pinky" href="#waves">
+        <svg class="gfx wv"><use href="#wave"/></svg>
+        <div class="txt"><span class="eyebrow">Collection</span><h3>Pink Wave</h3><p>Pinks, berries and florals. 10 pieces, from vests to goggles.</p><span class="btn solid">Shop Pink Wave</span></div>
+        <div class="pile"><img class="p i1" src="img/vest_leopard.webp" alt=""><img class="p i2" src="img/vest_berry.webp" alt=""><img class="p i3" src="img/arm_pink.webp" alt=""><img class="p i4" src="img/vest_daisy.webp" alt=""></div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- 5. HERO PRODUCT SPOTLIGHT -->
+<section class="s" id="spot" style="padding-top:8px">
+  <div class="wrap">
+    <div class="note"><b>5. Classic vest spotlight.</b> Calm, sentence-case callouts around a clean packshot, plus a real photo of the vest being worn. Every claim here is already cleared (removable floats, sizing, UV-resistant neoprene, under-body strap).</div>
+    <div class="spot">
+      <div class="spot-art">
+        <div class="disc"></div>
+        <img class="p" id="spotImg" src="img/vest_azure.webp" alt="Classic swim vest, Azure Blue">
+        <img class="inset" src="img/spot_inset.webp" alt="Two children by a pool wearing Classic swim vests">
+        <div class="callout co1"><span class="dot"></span><b>Grows with them</b>8 removable floats. Take them out in pairs as skills build.</div>
+        <div class="callout co2"><span class="dot"></span><b>Sized by chest</b>S, M and L for ages 2 to 9.</div>
+        <div class="callout co3"><span class="dot"></span><b>Soft neoprene</b>UV-resistant and quick to dry.</div>
+        <div class="callout co4"><span class="dot"></span><b>Stays in place</b>Under-body strap and adjustable fit.</div>
+      </div>
+      <div class="copy">
+        <span class="eyebrow">Our best-selling swim trainer</span>
+        <h2>The Classic Swim Vest</h2>
+        <p>Start with all 8 floats in. As your child gets more confident, take them out in pairs, so the vest keeps up with their swimming. Drawstring bag included.</p>
+        <div class="swatch-strip" id="spotSwatches"></div>
+        <div class="sizes" role="group" aria-label="Choose a size">
+          <button type="button">S<small>2 to 3 yrs</small></button>
+          <button type="button">M<small>3 to 6 yrs</small></button>
+          <button type="button">L<small>6 to 9 yrs</small></button>
+        </div>
+        <div style="display:flex;gap:14px;align-items:center;flex-wrap:wrap"><span class="price">£29.99</span><a class="link" href="#spot">Find your size</a></div>
+        <div class="safety"><svg><use href="#shield"/></svg><span>A swimming aid to help children learn, not a life jacket. Always stay within arm's reach of your child in and around water.</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 6. REAL FAMILIES -->
+<section class="s" style="padding-top:8px">
+  <div class="wrap">
+    <div class="note"><b>6. Real families (new in v2).</b> Copy doc 3.7. Brings the lifestyle photography back as one strip instead of all over the page. Each photo is tagged with what's in it so it stays shoppable. Later this can become Instagram content via the UGC app.</div>
+    <div class="s-head">
+      <div><span class="eyebrow">#limmys</span><h2>Real families, real swims</h2><p>Tag @limmys.official to be featured.</p></div>
+    </div>
+    <div class="mosaic">
+      <a class="tile big" href="#bestsellers"><img src="img/m_splash.webp" alt="Four children splashing their feet at the pool edge in Limmys vests"><span class="tag">Swim vests</span></a>
+      <a class="tile" href="#bestsellers"><img src="img/m_run.webp" alt="Two children running out of the sea in Signature vests"><span class="tag">Signature Swim Vest</span></a>
+      <a class="tile" href="#bestsellers"><img src="img/m_mum.webp" alt="Girl in a Signature vest in the pool with her mum close by"><span class="tag">Pink Daisy</span></a>
+      <a class="tile" href="#bestsellers"><img src="img/m_rocks.webp" alt="Three children on a pebble beach in Limmys vests"><span class="tag">Classic Swim Vest</span></a>
+      <a class="tile" href="#bestsellers"><img src="img/l_headband2.webp" alt="Two children on a beach towel wearing swim headbands"><span class="tag">Swim headbands</span></a>
+    </div>
+  </div>
+</section>
+
+<!-- 7. WHY LIMMYS -->
+<section class="s" id="why" style="padding-top:16px">
+  <div class="wrap">
+    <div class="note"><b>7. Brand values.</b> Replaces the four "Superior Safety / Premium Quality" tabs and their "peace of mind" lines (copy doc 3.6). Awards as a quiet single line. Add logos if we have permission.</div>
+    <div class="s-head"><div><span class="eyebrow">Why Limmys</span><h2>Why parents choose Limmys</h2></div></div>
+    <div class="tenets">
+      <div class="tenet">
+        <div class="ic bg-sky"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="3.5" width="14" height="4" rx="2"/><rect x="5" y="10" width="14" height="4" rx="2"/><rect x="5" y="16.5" width="14" height="4" rx="2" stroke-dasharray="3 2.4"/></svg></div>
+        <h3>Grows with their skills</h3>
+        <p>8 removable floats in the Classic vest. Take them out in pairs as confidence builds.</p>
+      </div>
+      <div class="tenet">
+        <div class="ic bg-butter"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="8" width="19" height="8" rx="2"/><path d="M6.5 8v3M10 8v4.5M13.5 8v3M17 8v4.5"/></svg></div>
+        <h3>Made to fit</h3>
+        <p>Sized by chest, not just age. Adjustable straps keep the vest where it should be.</p>
+        <a href="#spot">See the size guide →</a>
+      </div>
+      <div class="tenet">
+        <div class="ic bg-mint"><svg><use href="#shield"/></svg></div>
+        <h3>Certified swimming aid</h3>
+        <p>Our swim vests are certified as a CE swimming aid to EN standards.</p>
+        <a href="#why">View certificates →</a>
+      </div>
+      <div class="tenet">
+        <div class="ic bg-pink"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8h12l1 12H5L6 8z"/><path d="M9 8a3 3 0 0 1 6 0"/><path d="M5.5 13h13"/></svg></div>
+        <h3>Kit for the whole swim bag</h3>
+        <p>Vests, arm bands, goggles and caps for kids, plus caps for the grown-ups.</p>
+      </div>
+    </div>
+    <div class="awards">
+      <span>Mom's Choice Awards</span><span>Parents' Picks Awards</span><span>Made For Mums Awards, Bronze</span><span>Loved By Children Awards, Platinum</span><span>Vergleich.org: "Very good"</span>
+    </div>
+  </div>
+</section>
+
+<!-- 8. REVIEWS -->
+<section class="s" style="padding-top:0">
+  <div class="wrap">
+    <div class="note"><b>8. Reviews: verified only.</b> The current carousel uses hand-written testimonials (copy doc section 10 says remove). Pull three verified Judge.me reviews here: one vest, one arm bands, one cap. Grey lines are placeholders.</div>
+    <div class="reviews">
+      <div class="rev-sum">
+        <span class="big"><span class="tbc" style="font-size:.7em">4.8</span></span>
+        <div><div class="stars">★★★★★</div><div style="color:var(--muted);font-size:15px">from <span class="tbc">31,067</span> verified reviews</div></div>
+        <h2 style="font-size:clamp(24px,2.4vw,30px);font-weight:700;margin-left:auto">Loved by families worldwide</h2>
+      </div>
+      <div class="rev-grid">
+        <div class="rev"><div class="prod"><img src="img/l_classic.webp" alt="">Classic Swim Vest</div><span class="stars">★★★★★</span><div class="ph-line"></div><div class="ph-line"></div><div class="ph-line s"></div><span class="who">Verified buyer · first name only</span></div>
+        <div class="rev"><div class="prod"><img src="img/l_armbands.webp" alt="">Arm Bands</div><span class="stars">★★★★★</span><div class="ph-line"></div><div class="ph-line"></div><div class="ph-line s"></div><span class="who">Verified buyer · first name only</span></div>
+        <div class="rev"><div class="prod"><img src="img/l_kidscap.webp" alt="">Kids Swim Cap</div><span class="stars">★★★★★</span><div class="ph-line"></div><div class="ph-line"></div><div class="ph-line s"></div><span class="who">Verified buyer · first name only</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 9. SWIM CLUB -->
+<section class="s" style="padding-top:0">
+  <div class="wrap">
+    <div class="note"><b>9. Email capture.</b> Copy doc 3.10, now with a photo. The optional child's age feeds stage-based Klaviyo flows. Replaces the live "Summer Giveaway" form.</div>
+    <div class="club">
+      <div class="in">
+        <svg class="gfx palm"><use href="#palm"/></svg>
+        <span class="eyebrow" style="color:var(--teal)">Limmys Swim Club</span>
+        <h2>Join the Limmys Swim Club</h2>
+        <p>Get <span class="tbc">10% off</span> your first order, first access to new launches and learn-to-swim tips for your child's stage.</p>
+        <form id="clubForm" novalidate>
+          <input id="clubEmail" type="email" placeholder="Email" aria-label="Email" autocomplete="email">
+          <select id="clubAge" aria-label="Child's age (optional)">
+            <option value="">Child's age (optional)</option>
+            <option>Under 2</option><option>2 to 3</option><option>3 to 6</option><option>6 to 9</option><option>9+</option>
+          </select>
+          <button class="btn" type="submit">Join the club</button>
+          <p class="fine">Unsubscribe at any time.</p>
+        </form>
+      </div>
+      <div class="photo"><img src="img/club.webp" alt="Two children in swim vests walking into the sea"></div>
+    </div>
+  </div>
+</section>
+</main>
+
+<div class="safety-band"><div class="wrap"><svg><use href="#shield"/></svg><span>Limmys swim vests and arm bands are swimming aids, not life jackets. Always supervise children in and around water.</span></div></div>
+
+<footer class="site">
+  <div class="wrap">
+    <div style="display:grid;gap:12px;align-content:start">
+      <span class="logo"><img src="img/logo.png" alt="Limmys" width="91" height="32"></span>
+      <span>Swim aids and swim accessories for kids, plus caps for the grown-ups.</span>
+    </div>
+    <div><h4>Shop</h4><ul><li><a href="#shop">Swim vests</a></li><li><a href="#shop">Arm bands</a></li><li><a href="#shop">Swim caps</a></li><li><a href="#shop">Goggles</a></li><li><a href="#shop">Headbands</a></li><li><a href="#shop">Gift card</a></li></ul></div>
+    <div><h4>Help</h4><ul><li><a href="#top">Size guides</a></li><li><a href="#top">FAQs</a></li><li><a href="#top">Delivery</a></li><li><a href="#top">Returns</a></li><li><a href="#top">Contact</a></li></ul></div>
+    <div><h4>About</h4><ul><li><a href="#why">Our story</a></li><li><a href="#why">Certificates and awards</a></li><li><a href="#top">Blog</a></li><li><a href="#top">Wholesale</a></li></ul></div>
+    <div class="base"><span>© 2026 Limmys</span><span>Privacy · Terms · Returns policy</span></div>
+  </div>
+</footer>
+
+<!-- REVIEW CHROME: open items -->
+<section class="open">
+  <div class="wrap">
+    <h2>For the team</h2>
+    <div class="cols">
+      <div>
+        <h3>Confirm before this goes live</h3>
+        <ol>
+          <li>UK free delivery threshold. The theme setting is 70 and the current bar reads "Free Shipping Above $70". Check what UK visitors see.</li>
+          <li>Review rating and count (the site shows 4.8 from 31,067). Use one number everywhere, from verified reviews only.</li>
+          <li>Swim Club incentive (10% off?) and whether the Klaviyo form needs a new code.</li>
+                    <li>Per-card review counts from Judge.me, and permission for award logos.</li>
+          <li>Safety standard line: the mockup uses the cleared wording "CE swimming aid to EN standards". The copy doc's [EN 13138-1] still needs Lidija or Jakob to confirm.</li>
+        </ol>
+      </div>
+      <div>
+        <h3>What changed in v5 (v3 and v4 kept for comparison)</h3>
+        <ol>
+          <li>Hero: the full Signature listing photo of the four kids fills the right of the banner, cropped by a wave with white and teal lines. The text sits on a soft sky panel on the left.</li>
+          <li>The text banner is cropped off the top of the photo, and the crop stops above one child's character-print shorts.</li>
+          <li>Everything below the hero matches v4.</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+(function () {
+  var products = [
+    { name: "Signature Swim Vest", badge: "Signature", dark: true, price: "£29.99", feat: "Integrated floats, YKK zip and two buckles", vest: true, alt: "l_vests",
+      colours: [
+        { n: "Sunshine Blue", hex: "#f6c445", img: "vest_sunshine" },
+        { n: "Sunset Blue", hex: "#f28a3b", img: "vest_sunset" },
+        { n: "Berry Pink", hex: "#e04f9b", img: "vest_berry" },
+        { n: "Pink Daisy", hex: "#f6b3cf", img: "vest_daisy" } ] },
+    { name: "Classic Swim Vest", badge: "Best seller", price: "£29.99", feat: "8 removable floats, take them out in pairs", vest: true, alt: "l_classic",
+      colours: [
+        { n: "Pink Blossom", hex: "#ff6b7d", img: "vest_blossom" },
+        { n: "Azure Blue", hex: "#7cc6f2", img: "vest_azure" },
+        { n: "Royal Blue", hex: "#1f4fc4", img: "vest_royal" },
+        { n: "Navy Blue", hex: "#1b2b55", img: "vest_navy" },
+        { n: "Pink Leopard", hex: "#f0408a", img: "vest_leopard" },
+        { n: "Pink Windmill", hex: "#d84bb2", img: "vest_windmill" },
+        { n: "Neon Green", hex: "#8be33c", img: "vest_green" } ] },
+    { name: "Arm Bands", price: "£9.99", feat: "Bright prints for first splashes", alt: "l_armbands",
+      colours: [
+        { n: "Orange", hex: "#f7a21b", img: "arm_orange" },
+        { n: "Purple", hex: "#6b5bd6", img: "arm_purple" },
+        { n: "Pink", hex: "#f58bb4", img: "arm_pink" },
+        { n: "Red", hex: "#e8392f", img: "arm_red" },
+        { n: "Yellow", hex: "#f5d90a", img: "arm_yellow" },
+        { n: "Lemon", hex: "#b6dd4a", img: "arm_lemon" } ] },
+    { name: "Kids Swim Goggles", price: "£9.99", feat: "Sized for smaller faces", model: true, alt: "l_goggles",
+      colours: [
+        { n: "Pink", hex: "#f39bc8", img: "gog_pink.jpg" },
+        { n: "Blue", hex: "#2d6fd6", img: "gog_blue.jpg" } ] },
+    { name: "Kids Swim Cap", price: "£8.99", feat: "100% silicone, one size", more: "6 colours", model: true, alt: "l_kidscap",
+      colours: [ { n: "Pink", hex: "#ff7fb5", img: "cap_kids.jpg" } ] },
+    { name: "Kids Long Hair Swim Cap", price: "£9.99", feat: "Extra room for long hair", more: "7 colours", model: true,
+      colours: [ { n: "Dark Pink", hex: "#ff4f9a", img: "cap_kidslh.jpg" } ] },
+    { name: "Swim Headband", price: "£14.99", feat: "Covers the ears, adjustable strap", more: "4 designs · S, M, L", model: true, wide: true, alt: "l_headband2",
+      colours: [ { n: "Light Blue", hex: "#7fc4f5", img: "headband" } ] },
+    { name: "Long Hair Swim Cap", price: "£9.99", feat: "For grown-ups with long hair", more: "More colours", model: true, alt: "l_adultcap",
+      colours: [ { n: "Black", hex: "#1d1d1f", img: "cap_womenlh.jpg" } ] }
+  ];
+  function src(f) { return "img/" + (f.indexOf(".") > -1 ? f : f + ".webp"); }
+  var BG = { vest_sunshine: "sky", vest_sunset: "coral", vest_berry: "pinkt", vest_daisy: "lilac", vest_blossom: "pinkt", vest_azure: "sky",
+    vest_royal: "sky", vest_navy: "mintt", vest_leopard: "pinkt", vest_windmill: "lilac", vest_green: "butter", arm_orange: "butter",
+    arm_purple: "lilac", arm_pink: "pinkt", arm_red: "coral", arm_yellow: "butter", arm_lemon: "mintt", "gog_pink.jpg": "pinkt",
+    "gog_blue.jpg": "sky", "cap_kids.jpg": "pinkt", "cap_kidslh.jpg": "coral", headband: "mintt", "cap_womenlh.jpg": "lilac" };
+  function bg(f) { return "var(--" + (BG[f] || "mist") + ")"; }
+  function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); }
+  var bag = 0, toastEl = document.getElementById("toast"), toastT;
+  function toast(msg) { toastEl.textContent = msg; toastEl.classList.add("show"); clearTimeout(toastT); toastT = setTimeout(function () { toastEl.classList.remove("show"); }, 1800); }
+  function addToBag(label) { bag++; document.getElementById("bagCount").textContent = bag; toast(label + " added to basket (mockup)"); }
+
+  // Best sellers
+  var grid = document.getElementById("productGrid");
+  products.forEach(function (p) {
+    var c0 = p.colours[0];
+    var el = document.createElement("article"); el.className = "card";
+    var sw = p.colours.length > 1
+      ? p.colours.map(function (c, j) { return '<button type="button" class="sw-btn" style="background:' + c.hex + '" aria-label="' + esc(c.n) + '" aria-pressed="' + (j === 0) + '" data-j="' + j + '"></button>'; }).join("") + '<span class="sw-label">' + esc(c0.n) + '</span>'
+      : '<span class="sw-label">' + esc(p.more || "") + '</span>';
+    var action = p.vest
+      ? '<div class="sizes" role="group" aria-label="Choose a size"><button type="button">S<small>2 to 3</small></button><button type="button">M<small>3 to 6</small></button><button type="button">L<small>6 to 9</small></button></div>'
+      : '<button type="button" class="add">Add to basket</button>';
+    var imgCls = p.model ? "model" + (p.wide ? " wide" : "") : "p";
+    el.innerHTML =
+      '<div class="ph" style="background:' + bg(c0.img) + '"><svg class="gfx palm"><use href="#palm"/></svg>' +
+        (p.badge ? '<span class="badge' + (p.dark ? ' dark' : '') + '">' + esc(p.badge) + '</span>' : '') +
+        '<img class="' + imgCls + '" src="' + src(c0.img) + '" alt="' + esc(p.name + ", " + c0.n) + '">' +
+        (p.alt ? '<img class="alt" src="img/' + p.alt + '.webp" alt="">' : '') +
+      '</div>' +
+      '<div class="body"><h3>' + esc(p.name) + '</h3><p class="feat">' + esc(p.feat) + '</p>' +
+        '<div class="swatches">' + sw + '</div>' +
+        '<div class="row"><span class="price">' + p.price + '</span><span class="rating"><span class="stars">★★★★★</span><span class="tbc">n</span></span></div>' +
+        action + '</div>';
+    var img = el.querySelector(".ph img"), lab = el.querySelector(".sw-label"), current = c0;
+    el.querySelectorAll(".sw-btn").forEach(function (b) {
+      b.addEventListener("click", function () {
+        current = p.colours[+b.dataset.j]; img.src = src(current.img); el.querySelector(".ph").style.background = bg(current.img); img.alt = p.name + ", " + current.n; lab.textContent = current.n;
+        el.querySelectorAll(".sw-btn").forEach(function (o) { o.setAttribute("aria-pressed", o === b); });
+      });
+    });
+    el.querySelectorAll(".sizes button").forEach(function (b) { b.addEventListener("click", function () { addToBag(p.name + ", " + current.n + ", size " + b.firstChild.nodeValue); }); });
+    var add = el.querySelector(".add");
+    if (add) add.addEventListener("click", function () { addToBag(p.name + (p.colours.length > 1 ? ", " + current.n : "")); });
+    grid.appendChild(el);
+  });
+
+  // Spotlight swatches (Classic colours)
+  var classic = products[1], spotImg = document.getElementById("spotImg"), spotSw = document.getElementById("spotSwatches"), spotColour = "Azure Blue";
+  classic.colours.forEach(function (c) {
+    var b = document.createElement("button");
+    b.type = "button"; b.className = "sw-btn"; b.style.background = c.hex; b.setAttribute("aria-label", c.n); b.setAttribute("aria-pressed", c.n === spotColour);
+    b.addEventListener("click", function () {
+      spotColour = c.n; spotImg.src = src(c.img); spotImg.alt = "Classic swim vest, " + c.n;
+      spotSw.querySelectorAll(".sw-btn").forEach(function (o) { o.setAttribute("aria-pressed", o === b); });
+      spotSw.querySelector(".sw-label").textContent = c.n;
+    });
+    spotSw.appendChild(b);
+  });
+  var sl = document.createElement("span"); sl.className = "sw-label"; sl.textContent = spotColour; spotSw.appendChild(sl);
+  document.querySelectorAll(".spot .sizes button").forEach(function (b) { b.addEventListener("click", function () { addToBag("Classic Swim Vest, " + spotColour + ", size " + b.firstChild.nodeValue); }); });
+
+  // Rotating announcement
+  var msgs = ['Free UK delivery over <span>£70</span>', 'Award-winning swim aids', '30-day returns'], mi = 0, ann = document.getElementById("annMsg");
+  if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) setInterval(function () { mi = (mi + 1) % msgs.length; ann.innerHTML = msgs[mi]; }, 3500);
+
+  // Notes toggle
+  var t = document.getElementById("notesToggle");
+  function setNotes(on) {
+    document.body.classList.toggle("notes-on", on); t.setAttribute("aria-pressed", on); t.textContent = "Review notes: " + (on ? "on" : "off");
+    try { localStorage.setItem("limmysNotes", on ? "1" : "0"); } catch (e) {}
+  }
+  var saved = null; try { saved = localStorage.getItem("limmysNotes"); } catch (e) {}
+  setNotes(saved !== "0");
+  t.addEventListener("click", function () { setNotes(!document.body.classList.contains("notes-on")); });
+
+  // Swim club (mockup only)
+  document.getElementById("clubForm").addEventListener("submit", function (e) {
+    e.preventDefault();
+    var f = e.target, old = f.querySelector(".ok"); if (old) old.remove();
+    var ok = document.createElement("p"); ok.className = "ok"; ok.textContent = "You're in! Check your inbox for your code. (Mockup: nothing was sent.)"; f.appendChild(ok);
+  });
+})();
+</script>
+
+</body>
+</html>
