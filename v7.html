@@ -194,17 +194,21 @@ section.s { padding-block: 64px; position: relative; }
 
 /* ---------- Spotlight ---------- */
 .spot { background: var(--sky); border-radius: 22px; display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); gap: 28px; align-items: center; padding: 36px; position: relative; overflow: hidden; }
-.spot-art { position: relative; aspect-ratio: 1 / .92; min-width: 0; max-width: 100%; }
-.spot-art .disc { position: absolute; width: 62%; aspect-ratio: 1; left: 19%; top: 8%; border-radius: 50%; background: var(--paper); }
-.spot-art img.p { position: absolute; width: 38%; left: 31%; top: 9%; z-index: 2; }
-.spot-art .inset { position: absolute; left: 0; bottom: 0; width: 36%; border-radius: 12px; border: 4px solid var(--paper); box-shadow: 0 10px 24px rgba(13,33,71,.18); z-index: 4; display: block; }
+.spot-art { position: relative; z-index: 1; aspect-ratio: 1 / .96; min-width: 0; max-width: 100%; }
+.spot-art .disc { position: absolute; width: 74%; aspect-ratio: 1; left: 9%; top: 5%; border-radius: 50%; background: var(--paper); }
+.spot-art img.p { position: absolute; width: 50%; left: 21%; top: 5%; z-index: 2; }
+.spot-art .inset { position: absolute; left: 0; bottom: 0; width: 30%; border-radius: 12px; border: 4px solid var(--paper); box-shadow: 0 10px 24px rgba(13,33,71,.18); z-index: 4; display: block; }
+.spot .gfx.wv1 { left: 0; bottom: 0; width: 100%; height: 46%; color: #cdeee8; }
+.spot .gfx.wv2 { left: 0; bottom: 0; width: 100%; height: 30%; color: #c7e0fa; transform: scaleX(-1); }
+.spot .gfx.palm { width: 120px; right: 24px; top: 18px; color: #c3dcf6; }
 .callout { position: absolute; z-index: 3; background: var(--paper); border-radius: 12px; padding: 9px 13px; font-size: 14px; line-height: 1.3; max-width: 40%; box-shadow: 0 6px 18px rgba(20,47,95,.10); }
 .callout b { display: block; font-weight: 600; color: var(--navy); font-size: 14.5px; margin-bottom: 2px; }
 .callout .dot { position: absolute; width: 10px; height: 10px; border-radius: 50%; background: var(--teal); border: 2px solid var(--paper); box-shadow: 0 0 0 1px var(--teal); }
-.co1 { left: 0; top: 6%; } .co1 .dot { right: -16px; top: 16px; }
-.co2 { right: 0; top: 18%; } .co2 .dot { left: -16px; top: 16px; }
-.co3 { left: 0; top: 40%; } .co3 .dot { right: -16px; top: 14px; }
-.co4 { right: 1%; bottom: 8%; } .co4 .dot { left: -16px; top: 14px; }
+.co1 { left: 0; top: 4%; } .co1 .dot { right: -16px; top: 16px; }
+.co2 { right: 0; top: 34%; } .co2 .dot { left: -16px; top: 16px; }
+.co3 { left: 0; top: 50%; } .co3 .dot { right: -16px; top: 14px; }
+.co4 { right: 0; bottom: 6%; } .co4 .dot { left: -16px; top: 14px; }
+@media (min-width: 561px) { .callout { max-width: 34%; } }
 .spot .copy { display: grid; gap: 16px; position: relative; z-index: 2; min-width: 0; }
 .spot h2 { font-size: clamp(28px, 3.2vw, 40px); font-weight: 800; }
 .spot .copy > p { font-size: 17px; color: var(--ink); max-width: 34em; }
@@ -602,6 +606,9 @@ header.site .drawer .wrap { display: grid; gap: 2px; padding-block: 12px 22px; }
   <div class="wrap">
     <div class="note"><b>5. Classic vest spotlight.</b> Calm, sentence-case callouts around a clean packshot, plus a real photo of the vest being worn. Every claim here is already cleared (removable floats, sizing, UV-resistant neoprene, under-body strap).</div>
     <div class="spot">
+      <svg class="gfx wv1" aria-hidden="true"><use href="#wave"/></svg>
+      <svg class="gfx wv2" aria-hidden="true"><use href="#wave"/></svg>
+      <svg class="gfx palm" aria-hidden="true"><use href="#palm"/></svg>
       <div class="spot-art">
         <div class="disc"></div>
         <img class="p" id="spotImg" src="img/vest_azure.webp" alt="Classic swim vest, Azure Blue">
