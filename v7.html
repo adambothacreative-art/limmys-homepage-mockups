@@ -424,6 +424,13 @@ header.site .drawer .wrap { display: grid; gap: 2px; padding-block: 12px 22px; }
 }
 @media (min-width: 981px) { .drawer { display: none !important; } }
 @media (max-width: 980px) { .mega { display: none !important; } }
+
+/* v7 category tiles: Amazon store style packshots */
+.cat.amz .ph { aspect-ratio: 4 / 3; background: transparent; }
+.cat.amz .ph img { object-position: center 45%; }
+.cats:has(.amz) { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; }
+.cat.amz h3 { font-size: 18px; }
+@media (max-width: 560px) { .cats:has(.amz) { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; } }
 </style>
 
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
@@ -555,17 +562,17 @@ header.site .drawer .wrap { display: grid; gap: 2px; padding-block: 12px 22px; }
 <!-- 2. SHOP BY CATEGORY -->
 <section class="s" id="shop">
   <div class="wrap">
-    <div class="note"><b>2. Shop by category (v4).</b> Same photos as the current homepage tiles, in pastel cards. Signature vests get their own "New" tile (it was "New Arrivals" on the live site). Headbands move to best sellers only, as there is no headband photo on the current homepage.</div>
+    <div class="note"><b>2. Shop by category (v7).</b> Tiles in the Limmys Amazon store style: packshots on flat pastel squares. Signature vests, arm bands, caps and goggles are the Amazon store images; Classic vests and headbands are made to match from our packshots.</div>
     <div class="s-head">
       <div><span class="eyebrow">Shop by category</span><h2>Kit for every stage of learning to swim</h2></div>
     </div>
     <div class="cats">
-      <a class="cat bg-sky" href="#bestsellers"><div class="ph"><img src="img/c_vests.webp" alt="Two children by a pool in Classic swim vests"></div><h3>Swim vests</h3><span class="meta">11 styles · £29.99</span></a>
-      <a class="cat bg-coral" href="#bestsellers"><div class="ph"><img src="img/c_signature.webp" alt="Two children by a pool in Signature swim vests"></div><h3>New: Signature vests</h3><span class="meta">4 colours · £29.99</span></a>
-      <a class="cat bg-butter" href="#bestsellers"><div class="ph"><img src="img/c_armbands.webp" alt="Children at the pool edge wearing arm bands"></div><h3>Arm bands</h3><span class="meta">6 prints · £9.99</span></a>
-      <a class="cat bg-pink" href="#bestsellers"><div class="ph"><img src="img/c_kidscaps.webp" alt="Two girls on a pebble beach in swim caps"></div><h3>Kids swim caps</h3><span class="meta">Short and long hair · from £8.99</span></a>
-      <a class="cat bg-lilac" href="#bestsellers"><div class="ph"><img src="img/c_goggles.webp" alt="Girl on the beach in a swim cap and goggles"></div><h3>Kids goggles</h3><span class="meta">2 colours · £9.99</span></a>
-      <a class="cat bg-mint" href="#bestsellers"><div class="ph"><img src="img/c_adultcaps.webp" alt="Two adults in a pool wearing swim caps"></div><h3>Grown-up caps</h3><span class="meta">Short and long hair · £9.99</span></a>
+      <a class="cat amz" href="#bestsellers" style="background:rgb(236,231,255)"><div class="ph"><img src="img/t_classic.webp" alt="Classic swim vests in Pink Blossom, Azure Blue and Royal Blue"></div><h3>Classic swim vests</h3><span class="meta">7 colours · £29.99</span></a>
+      <a class="cat amz" href="#bestsellers" style="background:rgb(233,249,246)"><div class="ph"><img src="img/t_signature.webp" alt="Signature swim vests in Pink Daisy, Sunshine Blue and Sunset Blue"></div><h3>New: Signature vests</h3><span class="meta">4 colours · £29.99</span></a>
+      <a class="cat amz" href="#bestsellers" style="background:rgb(255,234,243)"><div class="ph"><img src="img/t_armbands.webp" alt="Limmys arm bands in pink and yellow"></div><h3>Arm bands</h3><span class="meta">6 prints · £9.99</span></a>
+      <a class="cat amz" href="#bestsellers" style="background:rgb(253,242,178)"><div class="ph"><img src="img/t_caps.webp" alt="Limmys silicone swim caps in five colours"></div><h3>Swim caps</h3><span class="meta">Kids and grown-ups · from £8.99</span></a>
+      <a class="cat amz" href="#bestsellers" style="background:rgb(207,237,248)"><div class="ph"><img src="img/t_goggles.webp" alt="Kids swim goggles in pink and blue"></div><h3>Kids goggles</h3><span class="meta">2 colours · £9.99</span></a>
+      <a class="cat amz" href="#bestsellers" style="background:rgb(255,230,218)"><div class="ph"><img src="img/t_headbands.webp" alt="Four Limmys swim headbands"></div><h3>Swim headbands</h3><span class="meta">4 designs · £14.99</span></a>
     </div>
   </div>
 </section>
