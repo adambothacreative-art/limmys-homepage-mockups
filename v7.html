@@ -431,6 +431,10 @@ header.site .drawer .wrap { display: grid; gap: 2px; padding-block: 12px 22px; }
 .cats:has(.amz) { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; }
 .cat.amz h3 { font-size: 18px; }
 @media (max-width: 560px) { .cats:has(.amz) { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; } }
+
+/* v7: lifestyle photo as the main card image */
+.card .ph img.cover { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 1; }
+.card .ph:has(img.cover) .gfx.palm { display: none; }
 </style>
 
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
@@ -572,7 +576,7 @@ header.site .drawer .wrap { display: grid; gap: 2px; padding-block: 12px 22px; }
       <a class="cat amz" href="#bestsellers" style="background:rgb(255,234,243)"><div class="ph"><img src="img/t_armbands.webp" alt="Limmys arm bands in pink and yellow"></div><h3>Arm bands</h3><span class="meta">6 prints · £9.99</span></a>
       <a class="cat amz" href="#bestsellers" style="background:rgb(253,242,178)"><div class="ph"><img src="img/t_caps.webp" alt="Limmys silicone swim caps in five colours"></div><h3>Swim caps</h3><span class="meta">Kids and grown-ups · from £8.99</span></a>
       <a class="cat amz" href="#bestsellers" style="background:rgb(207,237,248)"><div class="ph"><img src="img/t_goggles.webp" alt="Kids swim goggles in pink and blue"></div><h3>Kids goggles</h3><span class="meta">2 colours · £9.99</span></a>
-      <a class="cat amz" href="#bestsellers" style="background:rgb(255,230,218)"><div class="ph"><img src="img/t_headbands.webp" alt="Four Limmys swim headbands"></div><h3>Swim headbands</h3><span class="meta">4 designs · £14.99</span></a>
+      <a class="cat amz" href="#bestsellers" style="background:rgb(220,245,238)"><div class="ph"><img src="img/t_headbands.webp" alt="Four Limmys swim headbands"></div><h3>Swim headbands</h3><span class="meta">4 designs · £14.99</span></a>
     </div>
   </div>
 </section>
@@ -619,7 +623,7 @@ header.site .drawer .wrap { display: grid; gap: 2px; padding-block: 12px 22px; }
       <div class="spot-art">
         <div class="disc"></div>
         <img class="p" id="spotImg" src="img/vest_azure.webp" alt="Classic swim vest, Azure Blue">
-        <img class="inset" src="img/spot_inset.webp" alt="Two children by a pool wearing Classic swim vests">
+        <img class="inset" src="img/p_spot.webp" alt="Boy by a pool wearing a Royal Blue Classic swim vest">
         <div class="callout co1"><span class="dot"></span><b>Grows with them</b>8 removable floats. Take them out in pairs as skills build.</div>
         <div class="callout co2"><span class="dot"></span><b>Sized by chest</b>S, M and L for ages 2 to 9.</div>
         <div class="callout co3"><span class="dot"></span><b>Soft neoprene</b>UV-resistant and quick to dry.</div>
@@ -794,7 +798,7 @@ header.site .drawer .wrap { display: grid; gap: 2px; padding-block: 12px 22px; }
         { n: "Sunset Blue", hex: "#f28a3b", img: "vest_sunset" },
         { n: "Berry Pink", hex: "#e04f9b", img: "vest_berry" },
         { n: "Pink Daisy", hex: "#f6b3cf", img: "vest_daisy" } ] },
-    { name: "Classic Swim Vest", badge: "Best seller", price: "£29.99", feat: "8 removable floats, take them out in pairs", vest: true, alt: "l_classic",
+    { name: "Classic Swim Vest", badge: "Best seller", price: "£29.99", feat: "8 removable floats, take them out in pairs", vest: true, alt: "p_classic",
       colours: [
         { n: "Pink Blossom", hex: "#ff6b7d", img: "vest_blossom" },
         { n: "Azure Blue", hex: "#7cc6f2", img: "vest_azure" },
@@ -803,7 +807,7 @@ header.site .drawer .wrap { display: grid; gap: 2px; padding-block: 12px 22px; }
         { n: "Pink Leopard", hex: "#f0408a", img: "vest_leopard" },
         { n: "Pink Windmill", hex: "#d84bb2", img: "vest_windmill" },
         { n: "Neon Green", hex: "#8be33c", img: "vest_green" } ] },
-    { name: "Arm Bands", price: "£9.99", feat: "Bright prints for first splashes", alt: "l_armbands",
+    { name: "Arm Bands", price: "£9.99", feat: "Bright prints for first splashes", alt: "p_armbands",
       colours: [
         { n: "Orange", hex: "#f7a21b", img: "arm_orange" },
         { n: "Purple", hex: "#6b5bd6", img: "arm_purple" },
@@ -811,18 +815,18 @@ header.site .drawer .wrap { display: grid; gap: 2px; padding-block: 12px 22px; }
         { n: "Red", hex: "#e8392f", img: "arm_red" },
         { n: "Yellow", hex: "#f5d90a", img: "arm_yellow" },
         { n: "Lemon", hex: "#b6dd4a", img: "arm_lemon" } ] },
-    { name: "Kids Swim Goggles", price: "£9.99", feat: "Sized for smaller faces", model: true, alt: "l_goggles",
+    { name: "Kids Swim Goggles", price: "£9.99", feat: "Sized for smaller faces", model: true, alt: "p_goggles",
       colours: [
         { n: "Pink", hex: "#f39bc8", img: "gog_pink.jpg" },
         { n: "Blue", hex: "#2d6fd6", img: "gog_blue.jpg" } ] },
-    { name: "Kids Swim Cap", price: "£8.99", feat: "100% silicone, one size", more: "6 colours", model: true, alt: "l_kidscap",
-      colours: [ { n: "Pink", hex: "#ff7fb5", img: "cap_kids.jpg" } ] },
+    { name: "Kids Swim Cap", price: "£8.99", feat: "100% silicone, one size", more: "6 colours", cover: true,
+      colours: [ { n: "Pink", hex: "#ff7fb5", img: "p_kidscap" } ] },
     { name: "Kids Long Hair Swim Cap", price: "£9.99", feat: "Extra room for long hair", more: "7 colours", model: true,
       colours: [ { n: "Dark Pink", hex: "#ff4f9a", img: "cap_kidslh.jpg" } ] },
-    { name: "Swim Headband", price: "£14.99", feat: "Covers the ears, adjustable strap", more: "4 designs · S, M, L", model: true, wide: true, alt: "l_headband2",
-      colours: [ { n: "Light Blue", hex: "#7fc4f5", img: "headband" } ] },
-    { name: "Long Hair Swim Cap", price: "£9.99", feat: "For grown-ups with long hair", more: "More colours", model: true, alt: "l_adultcap",
-      colours: [ { n: "Black", hex: "#1d1d1f", img: "cap_womenlh.jpg" } ] }
+    { name: "Swim Headband", price: "£14.99", feat: "Covers the ears, adjustable strap", more: "4 designs · S, M, L", cover: true, alt: "p_headband_towel",
+      colours: [ { n: "Pink Flowers", hex: "#f7b6d2", img: "p_headband_swim" } ] },
+    { name: "Long Hair Swim Cap", price: "£9.99", feat: "For grown-ups with long hair", more: "More colours", cover: true,
+      colours: [ { n: "Black", hex: "#1d1d1f", img: "p_adultcap" } ] }
   ];
   function src(f) { return "img/" + (f.indexOf(".") > -1 ? f : f + ".webp"); }
   var BG = { vest_sunshine: "sky", vest_sunset: "coral", vest_berry: "pinkt", vest_daisy: "lilac", vest_blossom: "pinkt", vest_azure: "sky",
@@ -846,7 +850,7 @@ header.site .drawer .wrap { display: grid; gap: 2px; padding-block: 12px 22px; }
     var action = p.vest
       ? '<div class="sizes" role="group" aria-label="Choose a size"><button type="button">S<small>2 to 3</small></button><button type="button">M<small>3 to 6</small></button><button type="button">L<small>6 to 9</small></button></div>'
       : '<button type="button" class="add">Add to basket</button>';
-    var imgCls = p.model ? "model" + (p.wide ? " wide" : "") : "p";
+    var imgCls = p.cover ? "cover" : p.model ? "model" + (p.wide ? " wide" : "") : "p";
     el.innerHTML =
       '<div class="ph" style="background:' + bg(c0.img) + '"><svg class="gfx palm"><use href="#palm"/></svg>' +
         (p.badge ? '<span class="badge' + (p.dark ? ' dark' : '') + '">' + esc(p.badge) + '</span>' : '') +
