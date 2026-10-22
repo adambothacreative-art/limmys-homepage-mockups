@@ -435,6 +435,9 @@ header.site .drawer .wrap { display: grid; gap: 2px; padding-block: 12px 22px; }
 /* v7: lifestyle photo as the main card image */
 .card .ph img.cover { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 1; }
 .card .ph:has(img.cover) .gfx.palm { display: none; }
+/* lifestyle photo shows first; hover or picking a colour reveals the product shot */
+.card .ph .life { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 2; transition: opacity .35s ease; }
+.card:hover .ph .life, .card.picked .ph .life { opacity: 0; }
 </style>
 
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
@@ -800,11 +803,11 @@ header.site .drawer .wrap { display: grid; gap: 2px; padding-block: 12px 22px; }
         { n: "Pink Daisy", hex: "#f6b3cf", img: "vest_daisy" } ] },
     { name: "Classic Swim Vest", badge: "Best seller", price: "£29.99", feat: "8 removable floats, take them out in pairs", vest: true, alt: "p_classic",
       colours: [
+        { n: "Pink Leopard", hex: "#f0408a", img: "vest_leopard" },
         { n: "Pink Blossom", hex: "#ff6b7d", img: "vest_blossom" },
         { n: "Azure Blue", hex: "#7cc6f2", img: "vest_azure" },
         { n: "Royal Blue", hex: "#1f4fc4", img: "vest_royal" },
         { n: "Navy Blue", hex: "#1b2b55", img: "vest_navy" },
-        { n: "Pink Leopard", hex: "#f0408a", img: "vest_leopard" },
         { n: "Pink Windmill", hex: "#d84bb2", img: "vest_windmill" },
         { n: "Neon Green", hex: "#8be33c", img: "vest_green" } ] },
     { name: "Arm Bands", price: "£9.99", feat: "Bright prints for first splashes", alt: "p_armbands",
@@ -817,8 +820,8 @@ header.site .drawer .wrap { display: grid; gap: 2px; padding-block: 12px 22px; }
         { n: "Lemon", hex: "#b6dd4a", img: "arm_lemon" } ] },
     { name: "Kids Swim Goggles", price: "£9.99", feat: "Sized for smaller faces", model: true, alt: "p_goggles",
       colours: [
-        { n: "Pink", hex: "#f39bc8", img: "gog_pink.jpg" },
-        { n: "Blue", hex: "#2d6fd6", img: "gog_blue.jpg" } ] },
+        { n: "Blue", hex: "#2d6fd6", img: "gog_blue.jpg" },
+        { n: "Pink", hex: "#f39bc8", img: "gog_pink.jpg" } ] },
     { name: "Kids Swim Cap", price: "£8.99", feat: "100% silicone, one size", more: "6 colours", cover: true,
       colours: [ { n: "Pink", hex: "#ff7fb5", img: "p_kidscap" } ] },
     { name: "Kids Long Hair Swim Cap", price: "£9.99", feat: "Extra room for long hair", more: "7 colours", model: true,
@@ -855,7 +858,7 @@ header.site .drawer .wrap { display: grid; gap: 2px; padding-block: 12px 22px; }
       '<div class="ph" style="background:' + bg(c0.img) + '"><svg class="gfx palm"><use href="#palm"/></svg>' +
         (p.badge ? '<span class="badge' + (p.dark ? ' dark' : '') + '">' + esc(p.badge) + '</span>' : '') +
         '<img class="' + imgCls + '" src="' + src(c0.img) + '" alt="' + esc(p.name + ", " + c0.n) + '">' +
-        (p.alt ? '<img class="alt" src="img/' + p.alt + '.webp" alt="">' : '') +
+        (p.alt ? '<img class="' + (p.cover ? 'alt' : 'life') + '" src="img/' + p.alt + '.webp" alt="">' : '') +
       '</div>' +
       '<div class="body"><h3>' + esc(p.name) + '</h3><p class="feat">' + esc(p.feat) + '</p>' +
         '<div class="swatches">' + sw + '</div>' +
@@ -864,7 +867,7 @@ header.site .drawer .wrap { display: grid; gap: 2px; padding-block: 12px 22px; }
     var img = el.querySelector(".ph img"), lab = el.querySelector(".sw-label"), current = c0;
     el.querySelectorAll(".sw-btn").forEach(function (b) {
       b.addEventListener("click", function () {
-        current = p.colours[+b.dataset.j]; img.src = src(current.img); el.querySelector(".ph").style.background = bg(current.img); img.alt = p.name + ", " + current.n; lab.textContent = current.n;
+        el.classList.add("picked"); current = p.colours[+b.dataset.j]; img.src = src(current.img); el.querySelector(".ph").style.background = bg(current.img); img.alt = p.name + ", " + current.n; lab.textContent = current.n;
         el.querySelectorAll(".sw-btn").forEach(function (o) { o.setAttribute("aria-pressed", o === b); });
       });
     });
