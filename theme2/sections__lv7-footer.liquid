@@ -1,0 +1,74 @@
+{% render 'lv7-head' %}
+<style>
+  .template-index .shopify-section-group-footer-group,
+  .template-index .shopify-section-group-foxify-footer-group { display: none !important; }
+</style>
+<div class="lv7">
+<footer class="site">
+  <div class="wrap">
+    <div style="display:grid;gap:12px;align-content:start">
+      <span class="logo">{%- render 'lv7-img', image: section.settings.logo, fallback: section.settings.logo_fallback, alt: shop.name, width: 300 -%}</span>
+      <span>{{ section.settings.tagline }}</span>
+    </div>
+    {%- for block in section.blocks -%}
+      <div {{ block.shopify_attributes }}><h4>{{ block.settings.heading }}</h4><ul>{% render 'lv7-links', links: block.settings.links, mode: 'li' %}</ul></div>
+    {%- endfor -%}
+    <div class="base"><span>© {{ 'now' | date: '%Y' }} {{ shop.name }}</span><span>{% render 'lv7-links', links: section.settings.legal, mode: 'plain' %}</span></div>
+  </div>
+</footer>
+</div>
+
+{% schema %}
+{
+  "name": "Limmys footer",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "logo",
+      "label": "Logo"
+    },
+    {
+      "type": "text",
+      "id": "logo_fallback",
+      "label": "Built-in image (used until you pick one)",
+      "info": "Theme file name without the lv7- prefix. Leave as is."
+    },
+    {
+      "type": "text",
+      "id": "tagline",
+      "label": "Tagline",
+      "default": "Swim aids and swim accessories for kids, plus caps for the grown-ups."
+    },
+    {
+      "type": "textarea",
+      "id": "legal",
+      "label": "Legal links (Label | /url per line)"
+    }
+  ],
+  "max_blocks": 4,
+  "blocks": [
+    {
+      "type": "column",
+      "name": "Link column",
+      "settings": [
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Heading",
+          "default": "Shop"
+        },
+        {
+          "type": "textarea",
+          "id": "links",
+          "label": "Links (Label | /url per line)"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Limmys footer"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,32 @@
+{%- liquid
+  assign sw_hex = '#c9d2df'
+  assign sw_cut = ''
+  assign sw_tint = ''
+  assign sw_lines = swatches | newline_to_br | split: '<br />'
+  for l in sw_lines
+    assign f = l | strip | split: '|'
+    assign fh = f[0] | strip
+    if fh == p.handle
+      assign sw_hex = f[1] | strip
+      assign sw_cut = f[2] | strip
+      assign sw_tint = f[3] | strip
+    endif
+  endfor
+  assign colour = p.title
+  if p.title contains ' - '
+    assign colour = p.title | split: ' - ' | last | strip
+  endif
+  assign cut_url = ''
+  if sw_cut != blank
+    assign cf = sw_cut
+    unless cf contains '.'
+      assign cf = cf | append: '.webp'
+    endunless
+    assign cut_url = 'lv7-' | append: cf | asset_url
+  endif
+  assign img_url = ''
+  if p.featured_image
+    assign img_url = p.featured_image | image_url: width: 800
+  endif
+-%}
+{"h":{{ p.handle | json }},"u":{{ p.url | json }},"n":{{ colour | json }},"x":{{ sw_hex | json }},"c":{{ cut_url | json }},"t":{{ sw_tint | json }},"i":{{ img_url | json }},"pr":{{ p.price | money | strip_html | json }},"opt":{{ p.options.first | json }},"v":[{%- for v in p.variants -%}{"id":{{ v.id }},"t":{{ v.title | json }},"a":{{ v.available | json }}}{%- unless forloop.last -%},{%- endunless -%}{%- endfor -%}]}

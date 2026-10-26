@@ -1,0 +1,23 @@
+{% render 'lv7-head' %}
+<div class="lv7">
+<div class="safety-band"><div class="wrap"><svg><use href="#lv7-shield"/></svg><span>{{ section.settings.text }}</span></div></div>
+</div>
+
+{% schema %}
+{
+  "name": "Limmys safety line",
+  "settings": [
+    {
+      "type": "textarea",
+      "id": "text",
+      "label": "Text",
+      "default": "Limmys swim vests and arm bands are swimming aids, not life jackets. Always supervise children in and around water."
+    }
+  ],
+  "presets": [
+    {
+      "name": "Limmys safety line"
+    }
+  ]
+}
+{% endschema %}

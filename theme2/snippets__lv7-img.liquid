@@ -1,0 +1,14 @@
+{%- comment -%}
+  Image with a built-in fallback. Params: image (image_picker value), fallback (theme asset name without the lv7- prefix),
+  alt, cls, width (default 1200), loading (default lazy).
+{%- endcomment -%}
+{%- assign w = width | default: 1200 -%}
+{%- assign ld = loading | default: 'lazy' -%}
+{%- if image != blank -%}
+  {%- assign a = alt | default: image.alt -%}
+  {{ image | image_url: width: w | image_tag: class: cls, alt: a, loading: ld, sizes: '(max-width: 980px) 100vw, 50vw' }}
+{%- elsif fallback != blank -%}
+  {%- assign fb = fallback | strip -%}
+  {%- unless fb contains '.' -%}{%- assign fb = fb | append: '.webp' -%}{%- endunless -%}
+  <img src="{{ 'lv7-' | append: fb | asset_url }}" class="{{ cls }}" alt="{{ alt | escape }}" loading="{{ ld }}">
+{%- endif -%}

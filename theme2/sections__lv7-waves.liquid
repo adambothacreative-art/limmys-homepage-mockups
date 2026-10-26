@@ -1,0 +1,135 @@
+{% render 'lv7-head' %}
+<div class="lv7">
+<section class="s">
+  <div class="wrap">
+    <div class="waves">
+      {%- for block in section.blocks -%}
+        {%- assign c = block.settings.collection -%}
+        {%- assign text = block.settings.text | replace: '[count]', c.products_count -%}
+        <a class="wave-tile" href="{{ block.settings.link | default: c.url | default: '#' }}" style="background: {{ block.settings.bg }}" {{ block.shopify_attributes }}>
+          <svg class="gfx wv" style="color: {{ block.settings.wave }}"><use href="#lv7-wave"/></svg>
+          <div class="txt"><span class="eyebrow">{{ block.settings.eyebrow }}</span><h3>{{ block.settings.title }}</h3><p>{{ text }}</p>{%- if block.settings.button != blank -%}<span class="btn solid">{{ block.settings.button }}</span>{%- endif -%}</div>
+          <div class="pile">
+            {%- for i in (1..4) -%}{%- assign ik = 'image_' | append: i -%}{%- assign fk = 'image_' | append: i | append: '_fallback' -%}
+              {%- capture cls -%}p i{{ i }}{%- endcapture -%}
+              {%- render 'lv7-img', image: block.settings[ik], fallback: block.settings[fk], alt: '', cls: cls, width: 600 -%}
+            {%- endfor -%}
+          </div>
+        </a>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+</div>
+
+{% schema %}
+{
+  "name": "Limmys colour collections",
+  "settings": [],
+  "max_blocks": 2,
+  "blocks": [
+    {
+      "type": "wave",
+      "name": "Collection tile",
+      "settings": [
+        {
+          "type": "text",
+          "id": "eyebrow",
+          "label": "Small heading",
+          "default": "Collection"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Blue Wave"
+        },
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Text",
+          "default": "[count] pieces, from vests to goggles.",
+          "info": "[count] shows the collection's product count."
+        },
+        {
+          "type": "text",
+          "id": "button",
+          "label": "Button",
+          "default": "Shop now"
+        },
+        {
+          "type": "collection",
+          "id": "collection",
+          "label": "Collection"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Link (optional)"
+        },
+        {
+          "type": "color",
+          "id": "bg",
+          "label": "Background",
+          "default": "#e4eefa"
+        },
+        {
+          "type": "color",
+          "id": "wave",
+          "label": "Wave colour",
+          "default": "#d3e3f6"
+        },
+        {
+          "type": "image_picker",
+          "id": "image_1",
+          "label": "Product image 1"
+        },
+        {
+          "type": "text",
+          "id": "image_1_fallback",
+          "label": "Built-in image (used until you pick one)",
+          "info": "Theme file name without the lv7- prefix. Leave as is."
+        },
+        {
+          "type": "image_picker",
+          "id": "image_2",
+          "label": "Product image 2"
+        },
+        {
+          "type": "text",
+          "id": "image_2_fallback",
+          "label": "Built-in image (used until you pick one)",
+          "info": "Theme file name without the lv7- prefix. Leave as is."
+        },
+        {
+          "type": "image_picker",
+          "id": "image_3",
+          "label": "Product image 3"
+        },
+        {
+          "type": "text",
+          "id": "image_3_fallback",
+          "label": "Built-in image (used until you pick one)",
+          "info": "Theme file name without the lv7- prefix. Leave as is."
+        },
+        {
+          "type": "image_picker",
+          "id": "image_4",
+          "label": "Product image 4"
+        },
+        {
+          "type": "text",
+          "id": "image_4_fallback",
+          "label": "Built-in image (used until you pick one)",
+          "info": "Theme file name without the lv7- prefix. Leave as is."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Limmys colour collections"
+    }
+  ]
+}
+{% endschema %}

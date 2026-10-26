@@ -1,0 +1,113 @@
+{% render 'lv7-head' %}
+<div class="lv7">
+<section class="s">
+  <div class="wrap">
+    <div class="s-head"><div>{%- if section.settings.eyebrow != blank -%}<span class="eyebrow">{{ section.settings.eyebrow }}</span>{%- endif -%}<h2>{{ section.settings.heading }}</h2></div></div>
+    <div class="tenets">
+      {%- for block in section.blocks -%}
+        <div class="tenet" {{ block.shopify_attributes }}>
+          <div class="ic" style="background: {{ block.settings.icon_bg }}">
+            {%- case block.settings.icon -%}{%- when 'floats' -%}<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="3.5" width="14" height="4" rx="2"/><rect x="5" y="10" width="14" height="4" rx="2"/><rect x="5" y="16.5" width="14" height="4" rx="2" stroke-dasharray="3 2.4"/></svg>{%- when 'ruler' -%}<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="8" width="19" height="8" rx="2"/><path d="M6.5 8v3M10 8v4.5M13.5 8v3M17 8v4.5"/></svg>{%- when 'shield' -%}<svg><use href="#lv7-shield"/></svg>{%- when 'bag' -%}<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8h12l1 12H5L6 8z"/><path d="M9 8a3 3 0 0 1 6 0"/><path d="M5.5 13h13"/></svg>{%- endcase -%}
+          </div>
+          <h3>{{ block.settings.title }}</h3>
+          <p>{{ block.settings.text }}</p>
+          {%- if block.settings.link_label != blank -%}<a href="{{ block.settings.link | default: '#' }}">{{ block.settings.link_label }} →</a>{%- endif -%}
+        </div>
+      {%- endfor -%}
+    </div>
+    {%- if section.settings.awards != blank -%}
+      <div class="awards">{%- assign aw = section.settings.awards | newline_to_br | split: '<br />' -%}{%- for a in aw -%}{%- assign t = a | strip -%}{%- if t != blank -%}<span>{{ t }}</span>{%- endif -%}{%- endfor -%}</div>
+    {%- endif -%}
+  </div>
+</section>
+</div>
+
+{% schema %}
+{
+  "name": "Limmys why us",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Small heading",
+      "default": "Why Limmys"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Why parents choose Limmys"
+    },
+    {
+      "type": "textarea",
+      "id": "awards",
+      "label": "Awards (one per line)"
+    }
+  ],
+  "max_blocks": 4,
+  "blocks": [
+    {
+      "type": "value",
+      "name": "Value",
+      "settings": [
+        {
+          "type": "select",
+          "id": "icon",
+          "label": "Icon",
+          "default": "floats",
+          "options": [
+            {
+              "value": "floats",
+              "label": "Floats"
+            },
+            {
+              "value": "ruler",
+              "label": "Ruler"
+            },
+            {
+              "value": "shield",
+              "label": "Shield"
+            },
+            {
+              "value": "bag",
+              "label": "Swim bag"
+            }
+          ]
+        },
+        {
+          "type": "color",
+          "id": "icon_bg",
+          "label": "Icon background",
+          "default": "#dbeeff"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Value"
+        },
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "Text"
+        },
+        {
+          "type": "text",
+          "id": "link_label",
+          "label": "Link label"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Link"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Limmys why us"
+    }
+  ]
+}
+{% endschema %}

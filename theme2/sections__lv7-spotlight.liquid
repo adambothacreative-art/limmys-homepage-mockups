@@ -1,0 +1,129 @@
+{% render 'lv7-head' %}
+<div class="lv7" data-lv7="spotlight">
+<section class="s">
+  <div class="wrap">
+    {%- assign plist = section.settings.products -%}
+    <div class="spot" data-card>
+      <script type="application/json" data-products>[{%- for p in plist -%}{% render 'lv7-product-json', p: p, swatches: section.settings.swatches %}{%- unless forloop.last -%},{%- endunless -%}{%- endfor -%}]</script>
+      <svg class="gfx wv1" aria-hidden="true"><use href="#lv7-wave"/></svg>
+      <svg class="gfx wv2" aria-hidden="true"><use href="#lv7-wave"/></svg>
+      <svg class="gfx palm" aria-hidden="true"><use href="#lv7-palm"/></svg>
+      <div class="spot-art">
+        <div class="disc"></div>
+        <img class="p" data-pack src="" alt="{{ section.settings.heading | escape }}">
+        {%- render 'lv7-img', image: section.settings.inset, fallback: section.settings.inset_fallback, alt: section.settings.inset_alt, cls: 'inset', width: 600 -%}
+        {%- for block in section.blocks limit: 4 -%}
+          <div class="callout co{{ forloop.index }}" {{ block.shopify_attributes }}><span class="dot"></span><b>{{ block.settings.title }}</b>{{ block.settings.text }}</div>
+        {%- endfor -%}
+      </div>
+      <div class="copy">
+        {%- if section.settings.eyebrow != blank -%}<span class="eyebrow">{{ section.settings.eyebrow }}</span>{%- endif -%}
+        <h2>{{ section.settings.heading }}</h2>
+        <p>{{ section.settings.text }}</p>
+        <div class="swatch-strip" data-swatches></div>
+        <div data-action></div>
+        <div style="display:flex;gap:14px;align-items:center;flex-wrap:wrap"><span class="price" data-price>{{ plist.first.price | money }}</span>
+          {%- if section.settings.size_label != blank -%}<a class="link" href="{{ section.settings.size_link | default: '#' }}">{{ section.settings.size_label }}</a>{%- endif -%}</div>
+        {%- if section.settings.safety != blank -%}<div class="safety"><svg><use href="#lv7-shield"/></svg><span>{{ section.settings.safety }}</span></div>{%- endif -%}
+      </div>
+    </div>
+  </div>
+</section>
+</div>
+
+{% schema %}
+{
+  "name": "Limmys product spotlight",
+  "settings": [
+    {
+      "type": "product_list",
+      "id": "products",
+      "label": "Products (one per colour)",
+      "limit": 12
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Small heading",
+      "default": "Our best-selling swim trainer"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "The Classic Swim Vest"
+    },
+    {
+      "type": "textarea",
+      "id": "text",
+      "label": "Text",
+      "default": "Start with all 8 floats in. As your child gets more confident, take them out in pairs, so the vest keeps up with their swimming. Drawstring bag included."
+    },
+    {
+      "type": "text",
+      "id": "size_label",
+      "label": "Size guide link label",
+      "default": "Find your size"
+    },
+    {
+      "type": "url",
+      "id": "size_link",
+      "label": "Size guide link"
+    },
+    {
+      "type": "textarea",
+      "id": "safety",
+      "label": "Safety note",
+      "default": "A swimming aid to help children learn, not a life jacket. Always stay within arm's reach of your child in and around water."
+    },
+    {
+      "type": "image_picker",
+      "id": "inset",
+      "label": "Small photo"
+    },
+    {
+      "type": "text",
+      "id": "inset_fallback",
+      "label": "Built-in image (used until you pick one)",
+      "info": "Theme file name without the lv7- prefix. Leave as is."
+    },
+    {
+      "type": "text",
+      "id": "inset_alt",
+      "label": "Small photo description",
+      "default": "Boy by a pool wearing a Royal Blue Classic swim vest"
+    },
+    {
+      "type": "textarea",
+      "id": "swatches",
+      "label": "Colour swatches",
+      "info": "Same format as the best sellers section."
+    }
+  ],
+  "max_blocks": 4,
+  "blocks": [
+    {
+      "type": "callout",
+      "name": "Feature callout",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Feature"
+        },
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Text"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Limmys product spotlight"
+    }
+  ]
+}
+{% endschema %}

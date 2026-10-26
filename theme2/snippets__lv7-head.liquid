@@ -1,0 +1,12 @@
+{%- comment -%} Shared assets for Limmys v7 sections (fonts, styles, script, icons). Safe to render more than once. {%- endcomment -%}
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Jost:wght@400;500;600&family=Raleway:wght@600;700;800&display=swap">
+{{ 'lv7.css' | asset_url | stylesheet_tag }}
+<script>window.LV7A = window.LV7A || "{{ 'lv7-logo.png' | asset_url | split: 'lv7-logo.png' | first }}";</script>
+<script src="{{ 'lv7.js' | asset_url }}" defer></script>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="lv7-palm" viewBox="0 0 120 160"><path d="M58 158 C56 122 60 92 66 62" fill="none" stroke="currentColor" stroke-width="7" stroke-linecap="round"/><g fill="currentColor"><path d="M66 62 C50 40 26 34 6 44 C28 42 46 48 66 62Z"/><path d="M66 62 C60 36 66 16 84 4 C76 22 72 40 66 62Z"/><path d="M66 62 C82 42 104 38 118 50 C98 48 84 52 66 62Z"/><path d="M66 62 C44 58 26 70 18 88 C34 74 48 68 66 62Z"/><path d="M66 62 C86 60 104 72 110 92 C96 78 82 70 66 62Z"/></g></symbol>
+  <symbol id="lv7-wave" viewBox="0 0 1200 80" preserveAspectRatio="none"><path fill="currentColor" d="M0 40 C150 0 300 80 450 40 S750 0 900 40 S1100 80 1200 40 V80 H0Z"/></symbol>
+  <symbol id="lv7-shield" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" d="M12 3l7 3v5c0 4.5-3 8.3-7 10-4-1.7-7-5.5-7-10V6l7-3z"/><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" d="M8.8 12.2l2.2 2.2 4.4-4.6"/></symbol>
+</svg>

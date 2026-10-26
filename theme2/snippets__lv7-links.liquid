@@ -1,0 +1,21 @@
+{%- comment -%}
+  Renders a list of links written one per line as "Label | /url". Params: links (text), show_counts (bool), mode ('li' or 'plain').
+  A /collections/handle link can show that collection's product count.
+{%- endcomment -%}
+{%- assign lines = links | newline_to_br | split: '<br />' -%}
+{%- for line in lines -%}
+  {%- assign parts = line | strip | split: '|' -%}
+  {%- assign lab = parts[0] | strip -%}
+  {%- if lab != blank -%}
+    {%- assign url = parts[1] | strip -%}
+    {%- if url == blank -%}{%- assign url = '#' -%}{%- endif -%}
+    {%- capture count -%}
+      {%- if show_counts and url contains '/collections/' -%}
+        {%- assign ch = url | split: '/collections/' | last | split: '?' | first | split: '/' | first -%}
+        {%- assign cc = collections[ch].products_count -%}
+        {%- if cc > 0 %} <small>{{ cc }}</small>{%- endif -%}
+      {%- endif -%}
+    {%- endcapture -%}
+    {%- if mode == 'li' -%}<li><a href="{{ url }}">{{ lab }}{{ count }}</a></li>{%- else -%}<a href="{{ url }}">{{ lab }}</a>{%- endif -%}
+  {%- endif -%}
+{%- endfor -%}

@@ -1,0 +1,425 @@
+{% render 'lv7-head' %}
+<style>
+  .template-index .shopify-section-group-header-group,
+  .template-index .shopify-section-group-foxify-header-group { display: none !important; }
+  #shopify-section-{{ section.id }} { position: sticky; top: 0; z-index: 40; }
+</style>
+{%- capture free_delivery -%}{{ settings.free_shipping_minimum_amount | times: 100 | money_without_trailing_zeros }}{%- endcapture -%}
+{%- capture msgs -%}
+  {%- for i in (1..3) -%}{%- assign key = 'announcement_' | append: i -%}{%- assign m = section.settings[key] -%}
+    {%- if m != blank -%}{{ m | replace: '[free_delivery]', free_delivery }}|||{%- endif -%}
+  {%- endfor -%}
+{%- endcapture -%}
+{%- assign msg_list = msgs | split: '|||' -%}
+<div class="lv7" data-lv7="header" data-msgs="{{ msgs | strip | escape }}">
+  {%- if section.settings.show_utility -%}
+  <div class="utility"><div class="wrap">
+    <span class="l">{%- if section.settings.show_country -%}{{ localization.country.name }} · {{ cart.currency.symbol }} {{ cart.currency.iso_code }}{%- endif -%}</span>
+    <span class="msg" data-msg>{{ msg_list.first }}</span>
+    <span class="r">{%- if section.settings.utility_label != blank -%}<a href="{{ section.settings.utility_link | default: '#' }}">{{ section.settings.utility_label }}</a>{%- endif -%}</span>
+  </div></div>
+  {%- endif -%}
+  <header class="site">
+    <div class="wrap">
+      <a class="logo" href="{{ routes.root_url }}" aria-label="{{ shop.name }} home">
+        {%- render 'lv7-img', image: section.settings.logo, fallback: section.settings.logo_fallback, alt: shop.name, width: 300, loading: 'eager' -%}
+      </a>
+      <nav class="main" aria-label="Main">
+        {%- for block in section.blocks -%}
+          {%- if block.type == 'dropdown' -%}
+            <button class="nav-dd" type="button" aria-expanded="false" aria-controls="lv7-mega-{{ block.id }}" {{ block.shopify_attributes }}>{{ block.settings.label }} <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.5 4.5 6 8l3.5-3.5"/></svg></button>
+          {%- else -%}
+            <a href="{{ block.settings.link | default: '#' }}"{% if block.settings.highlight %} class="wholesale"{% endif %} {{ block.shopify_attributes }}>{{ block.settings.label }}</a>
+          {%- endif -%}
+        {%- endfor -%}
+      </nav>
+      <div class="hdr-r">
+        <form class="search" action="{{ routes.search_url }}" method="get" role="search"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg><input name="q" type="search" placeholder="{{ section.settings.search_placeholder }}" aria-label="Search"></form>
+        <a class="icon-btn search-ic" href="{{ routes.search_url }}" aria-label="Search"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg></a>
+        <a class="icon-btn hide-sm" href="{{ routes.account_url }}" aria-label="Account"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c1.5-4 4.5-6 8-6s6.5 2 8 6"/></svg></a>
+        <a class="icon-btn" href="{{ routes.cart_url }}" aria-label="Basket"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M5 8h14l-1.2 11.2a2 2 0 0 1-2 1.8H8.2a2 2 0 0 1-2-1.8L5 8z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg><span class="bag-count" data-bag-count>{{ cart.item_count }}</span></a>
+        <button class="icon-btn menu-btn" type="button" aria-label="Menu" aria-expanded="false" aria-controls="lv7-drawer-{{ section.id }}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+      </div>
+    </div>
+
+    {%- for block in section.blocks -%}{%- if block.type == 'dropdown' -%}
+      {%- liquid
+        assign ncols = 0
+        for i in (1..3)
+          assign hk = 'col' | append: i | append: '_links'
+          if block.settings[hk] != blank
+            assign ncols = ncols | plus: 1
+          endif
+        endfor
+        assign nimgs = 0
+        for i in (1..3)
+          assign ik = 'image' | append: i
+          assign fk = 'image' | append: i | append: '_fallback'
+          if block.settings[ik] != blank or block.settings[fk] != blank
+            assign nimgs = nimgs | plus: 1
+          endif
+        endfor
+        assign img_fr = 2.3
+        if ncols == 1
+          assign img_fr = 3.4
+        endif
+      -%}
+      <div class="mega" id="lv7-mega-{{ block.id }}" hidden>
+        <div class="wrap" style="grid-template-columns: repeat({{ ncols }}, minmax(150px, .8fr)) minmax(0, {{ img_fr }}fr);">
+          {%- for i in (1..3) -%}
+            {%- assign hk = 'col' | append: i | append: '_heading' -%}{%- assign lk = 'col' | append: i | append: '_links' -%}
+            {%- assign hk2 = 'col' | append: i | append: '_heading_2' -%}{%- assign lk2 = 'col' | append: i | append: '_links_2' -%}
+            {%- if block.settings[lk] != blank -%}
+            <div class="col">
+              <div><h4>{{ block.settings[hk] }}</h4><ul>{% render 'lv7-links', links: block.settings[lk], show_counts: block.settings.show_counts, mode: 'li' %}</ul></div>
+              {%- if block.settings[lk2] != blank -%}<div><h4>{{ block.settings[hk2] }}</h4><ul>{% render 'lv7-links', links: block.settings[lk2], show_counts: block.settings.show_counts, mode: 'li' %}</ul></div>{%- endif -%}
+            </div>
+            {%- endif -%}
+          {%- endfor -%}
+          {%- if nimgs > 0 -%}
+          <div class="pics" style="grid-template-columns: repeat({{ nimgs }}, minmax(0, 1fr));">
+            {%- for i in (1..3) -%}
+              {%- assign ik = 'image' | append: i -%}{%- assign fk = 'image' | append: i | append: '_fallback' -%}
+              {%- assign labk = 'image' | append: i | append: '_label' -%}{%- assign urlk = 'image' | append: i | append: '_link' -%}
+              {%- assign pkk = 'image' | append: i | append: '_packshot' -%}{%- assign bgk = 'image' | append: i | append: '_bg' -%}
+              {%- if block.settings[ik] != blank or block.settings[fk] != blank -%}
+                {%- assign cls = '' -%}{%- if block.settings[pkk] -%}{%- assign cls = 'pk' -%}{%- endif -%}
+                <a class="pic" href="{{ block.settings[urlk] | default: '#' }}"{% if block.settings[pkk] %} style="background: {{ block.settings[bgk] }}"{% endif %}>
+                  {%- render 'lv7-img', image: block.settings[ik], fallback: block.settings[fk], alt: block.settings[labk], cls: cls, width: 700 -%}
+                  {%- if block.settings[labk] != blank -%}<span>{{ block.settings[labk] }} →</span>{%- endif -%}
+                </a>
+              {%- endif -%}
+            {%- endfor -%}
+          </div>
+          {%- endif -%}
+        </div>
+      </div>
+    {%- endif -%}{%- endfor -%}
+
+    <nav class="drawer" id="lv7-drawer-{{ section.id }}" aria-label="Mobile menu" hidden>
+      <div class="wrap">
+        {%- for block in section.blocks -%}
+          {%- if block.type == 'dropdown' -%}
+            <details><summary>{{ block.settings.label }}</summary><div class="sub">
+              {%- for i in (1..3) -%}
+                {%- assign hk = 'col' | append: i | append: '_heading' -%}{%- assign lk = 'col' | append: i | append: '_links' -%}
+                {%- if block.settings[lk] != blank -%}<b>{{ block.settings[hk] }}</b>{% render 'lv7-links', links: block.settings[lk], mode: 'plain' %}{%- endif -%}
+              {%- endfor -%}
+            </div></details>
+          {%- else -%}
+            <a href="{{ block.settings.link | default: '#' }}"{% if block.settings.highlight %} class="wholesale"{% endif %}>{{ block.settings.label }}</a>
+          {%- endif -%}
+        {%- endfor -%}
+        {%- if section.settings.utility_label != blank -%}<a href="{{ section.settings.utility_link | default: '#' }}">{{ section.settings.utility_label }}</a>{%- endif -%}
+      </div>
+    </nav>
+  </header>
+</div>
+
+{% schema %}
+{
+  "name": "Limmys header and menu",
+  "class": "lv7-section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Top bar"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_utility",
+      "label": "Show top bar",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_country",
+      "label": "Show country and currency",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "announcement_1",
+      "label": "Message 1",
+      "default": "Free UK delivery over [free_delivery]",
+      "info": "[free_delivery] shows the free delivery amount from theme settings."
+    },
+    {
+      "type": "text",
+      "id": "announcement_2",
+      "label": "Message 2",
+      "default": "Award-winning swim aids"
+    },
+    {
+      "type": "text",
+      "id": "announcement_3",
+      "label": "Message 3",
+      "default": "30-day returns"
+    },
+    {
+      "type": "text",
+      "id": "utility_label",
+      "label": "Top bar link",
+      "default": "Help"
+    },
+    {
+      "type": "url",
+      "id": "utility_link",
+      "label": "Top bar link URL"
+    },
+    {
+      "type": "header",
+      "content": "Logo and search"
+    },
+    {
+      "type": "image_picker",
+      "id": "logo",
+      "label": "Logo"
+    },
+    {
+      "type": "text",
+      "id": "logo_fallback",
+      "label": "Built-in image (used until you pick one)",
+      "info": "Theme file name without the lv7- prefix. Leave as is."
+    },
+    {
+      "type": "text",
+      "id": "search_placeholder",
+      "label": "Search placeholder",
+      "default": "Search vests, caps, goggles"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "link",
+      "name": "Menu link",
+      "settings": [
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Label",
+          "default": "Link"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Link"
+        },
+        {
+          "type": "checkbox",
+          "id": "highlight",
+          "label": "Highlight (teal)",
+          "default": false
+        }
+      ]
+    },
+    {
+      "type": "dropdown",
+      "name": "Dropdown (mega menu)",
+      "settings": [
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Label",
+          "default": "Products"
+        },
+        {
+          "type": "checkbox",
+          "id": "show_counts",
+          "label": "Show product counts next to collection links",
+          "default": true
+        },
+        {
+          "type": "paragraph",
+          "content": "Links: one per line, written as Label | /collections/handle"
+        },
+        {
+          "type": "header",
+          "content": "Column 1"
+        },
+        {
+          "type": "text",
+          "id": "col1_heading",
+          "label": "Heading"
+        },
+        {
+          "type": "textarea",
+          "id": "col1_links",
+          "label": "Links"
+        },
+        {
+          "type": "text",
+          "id": "col1_heading_2",
+          "label": "Second heading (optional)"
+        },
+        {
+          "type": "textarea",
+          "id": "col1_links_2",
+          "label": "Second links (optional)"
+        },
+        {
+          "type": "header",
+          "content": "Column 2"
+        },
+        {
+          "type": "text",
+          "id": "col2_heading",
+          "label": "Heading"
+        },
+        {
+          "type": "textarea",
+          "id": "col2_links",
+          "label": "Links"
+        },
+        {
+          "type": "text",
+          "id": "col2_heading_2",
+          "label": "Second heading (optional)"
+        },
+        {
+          "type": "textarea",
+          "id": "col2_links_2",
+          "label": "Second links (optional)"
+        },
+        {
+          "type": "header",
+          "content": "Column 3"
+        },
+        {
+          "type": "text",
+          "id": "col3_heading",
+          "label": "Heading"
+        },
+        {
+          "type": "textarea",
+          "id": "col3_links",
+          "label": "Links"
+        },
+        {
+          "type": "text",
+          "id": "col3_heading_2",
+          "label": "Second heading (optional)"
+        },
+        {
+          "type": "textarea",
+          "id": "col3_links_2",
+          "label": "Second links (optional)"
+        },
+        {
+          "type": "header",
+          "content": "Image 1"
+        },
+        {
+          "type": "image_picker",
+          "id": "image1",
+          "label": "Image"
+        },
+        {
+          "type": "text",
+          "id": "image1_fallback",
+          "label": "Built-in image (used until you pick one)"
+        },
+        {
+          "type": "text",
+          "id": "image1_label",
+          "label": "Label"
+        },
+        {
+          "type": "url",
+          "id": "image1_link",
+          "label": "Link"
+        },
+        {
+          "type": "checkbox",
+          "id": "image1_packshot",
+          "label": "Product cut-out on a colour",
+          "default": false
+        },
+        {
+          "type": "color",
+          "id": "image1_bg",
+          "label": "Background colour",
+          "default": "#e4eefa"
+        },
+        {
+          "type": "header",
+          "content": "Image 2"
+        },
+        {
+          "type": "image_picker",
+          "id": "image2",
+          "label": "Image"
+        },
+        {
+          "type": "text",
+          "id": "image2_fallback",
+          "label": "Built-in image (used until you pick one)"
+        },
+        {
+          "type": "text",
+          "id": "image2_label",
+          "label": "Label"
+        },
+        {
+          "type": "url",
+          "id": "image2_link",
+          "label": "Link"
+        },
+        {
+          "type": "checkbox",
+          "id": "image2_packshot",
+          "label": "Product cut-out on a colour",
+          "default": false
+        },
+        {
+          "type": "color",
+          "id": "image2_bg",
+          "label": "Background colour",
+          "default": "#e4eefa"
+        },
+        {
+          "type": "header",
+          "content": "Image 3"
+        },
+        {
+          "type": "image_picker",
+          "id": "image3",
+          "label": "Image"
+        },
+        {
+          "type": "text",
+          "id": "image3_fallback",
+          "label": "Built-in image (used until you pick one)"
+        },
+        {
+          "type": "text",
+          "id": "image3_label",
+          "label": "Label"
+        },
+        {
+          "type": "url",
+          "id": "image3_link",
+          "label": "Link"
+        },
+        {
+          "type": "checkbox",
+          "id": "image3_packshot",
+          "label": "Product cut-out on a colour",
+          "default": false
+        },
+        {
+          "type": "color",
+          "id": "image3_bg",
+          "label": "Background colour",
+          "default": "#e4eefa"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Limmys header and menu"
+    }
+  ]
+}
+{% endschema %}

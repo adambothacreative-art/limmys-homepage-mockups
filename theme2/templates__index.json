@@ -1,0 +1,645 @@
+{
+  "sections": {
+    "header": {
+      "type": "lv7-header",
+      "settings": {
+        "show_utility": true,
+        "show_country": true,
+        "announcement_1": "Free UK delivery over [free_delivery]",
+        "announcement_2": "Award-winning swim aids",
+        "announcement_3": "30-day returns",
+        "utility_label": "Help",
+        "utility_link": "shopify://pages/faq",
+        "logo_fallback": "logo.png",
+        "search_placeholder": "Search vests, caps, goggles"
+      },
+      "blocks": {
+        "products": {
+          "type": "dropdown",
+          "settings": {
+            "label": "Products",
+            "show_counts": true,
+            "col1_heading": "Swim aids",
+            "col1_links": "All swim vests | /collections/all-swim-vests\nClassic swim vests | /collections/swim-vests\nSignature swim vests | /collections/signature-collection\nArm bands | /collections/kids-arm-band",
+            "col1_heading_2": "Coming soon",
+            "col1_links_2": "Swim diapers | #\nLife jackets | #",
+            "col2_heading": "Swim accessories",
+            "col2_links": "Kids swim caps | /collections/swim-caps\nKids long hair caps | /products/swim-caps-kids-long-hair\nKids goggles | /collections/kids-swim-goggles\nSwim headbands | /collections/headbands-for-kids-and-adults",
+            "col3_heading": "Grown-ups",
+            "col3_links": "Adult swim caps | /collections/swim-caps-for-adults\nLong hair swim caps | /products/swim-caps-womens-long-hair",
+            "col3_heading_2": "Gifts",
+            "col3_links_2": "Gift card | /products/limmys-gift-card",
+            "image1_fallback": "m_run",
+            "image1_label": "Swim vests",
+            "image1_link": "shopify://collections/all-swim-vests",
+            "image2_fallback": "c_kidscaps",
+            "image2_label": "Caps and goggles",
+            "image2_link": "shopify://collections/swim-caps"
+          }
+        },
+        "collections": {
+          "type": "dropdown",
+          "settings": {
+            "label": "Collections",
+            "show_counts": true,
+            "col1_heading": "Collections",
+            "col1_links": "Best sellers | /collections/best-sellers\nBlue Wave | /collections/blue\nPink Wave | /collections/pinks",
+            "image1_fallback": "m_splash",
+            "image1_label": "Best sellers",
+            "image1_link": "shopify://collections/best-sellers",
+            "image2_fallback": "vest_sunshine",
+            "image2_label": "Blue Wave",
+            "image2_link": "shopify://collections/blue",
+            "image2_packshot": true,
+            "image2_bg": "#e4eefa",
+            "image3_fallback": "vest_berry",
+            "image3_label": "Pink Wave",
+            "image3_link": "shopify://collections/pinks",
+            "image3_packshot": true,
+            "image3_bg": "#fbe8ef"
+          }
+        },
+        "faq": {
+          "type": "link",
+          "settings": {
+            "label": "FAQ",
+            "link": "shopify://pages/faq"
+          }
+        },
+        "blog": {
+          "type": "link",
+          "settings": {
+            "label": "Blog",
+            "link": "shopify://blogs/articles"
+          }
+        },
+        "story": {
+          "type": "link",
+          "settings": {
+            "label": "Our story",
+            "link": "shopify://pages/who-we-are"
+          }
+        },
+        "wholesale": {
+          "type": "link",
+          "settings": {
+            "label": "Wholesale",
+            "link": "shopify://pages/wholesale-inquiry",
+            "highlight": true
+          }
+        },
+        "contact": {
+          "type": "link",
+          "settings": {
+            "label": "Contact us",
+            "link": "shopify://pages/contact-us"
+          }
+        }
+      },
+      "block_order": [
+        "products",
+        "collections",
+        "faq",
+        "blog",
+        "story",
+        "wholesale",
+        "contact"
+      ]
+    },
+    "hero": {
+      "type": "lv7-hero",
+      "settings": {
+        "image_fallback": "hero_beach",
+        "button_1_link": "shopify://collections/all-swim-vests",
+        "button_2_link": "shopify://collections/swim-caps"
+      }
+    },
+    "categories": {
+      "type": "lv7-categories",
+      "settings": {
+        "columns": 3
+      },
+      "blocks": {
+        "classic": {
+          "type": "tile",
+          "settings": {
+            "title": "Classic swim vests",
+            "collection": "swim-vests",
+            "unit": "colours",
+            "bg": "#ece7ff",
+            "image_fallback": "t_classic"
+          }
+        },
+        "signature": {
+          "type": "tile",
+          "settings": {
+            "title": "New: Signature vests",
+            "collection": "signature-collection",
+            "unit": "colours",
+            "bg": "#e9f9f6",
+            "image_fallback": "t_signature"
+          }
+        },
+        "armbands": {
+          "type": "tile",
+          "settings": {
+            "title": "Arm bands",
+            "collection": "kids-arm-band",
+            "unit": "prints",
+            "bg": "#ffeaf3",
+            "image_fallback": "t_armbands"
+          }
+        },
+        "caps": {
+          "type": "tile",
+          "settings": {
+            "title": "Swim caps",
+            "collection": "swim-caps",
+            "meta": "Kids and grown-ups · from [from]",
+            "bg": "#fdf2b2",
+            "image_fallback": "t_caps"
+          }
+        },
+        "goggles": {
+          "type": "tile",
+          "settings": {
+            "title": "Kids goggles",
+            "collection": "kids-swim-goggles",
+            "unit": "colours",
+            "bg": "#cfedf8",
+            "image_fallback": "t_goggles"
+          }
+        },
+        "headbands": {
+          "type": "tile",
+          "settings": {
+            "title": "Swim headbands",
+            "collection": "headbands-for-kids-and-adults",
+            "meta": "4 designs · [from]",
+            "bg": "#dcf5ee",
+            "image_fallback": "t_headbands"
+          }
+        }
+      },
+      "block_order": [
+        "classic",
+        "signature",
+        "armbands",
+        "caps",
+        "goggles",
+        "headbands"
+      ]
+    },
+    "bestsellers": {
+      "type": "lv7-bestsellers",
+      "settings": {
+        "link": "shopify://collections/best-sellers",
+        "swatches": "swim-vest-sunshine-blue-lim0021 | #f6c445 | vest_sunshine | #dbeeff\nswim-vest-sunset-blue-m-lim0022 | #f28a3b | vest_sunset | #ffe2d3\nswim-vest-berry-pink-lim0023 | #e04f9b | vest_berry | #ffe2ee\nswim-vest-pink-daisy-lim0024 | #f6b3cf | vest_daisy | #ebe5ff\npremium-neoprene-swim-vest-pink-leopard | #f0408a | vest_leopard | #ffe2ee\npremium-neoprene-swim-vest-for-girls | #ff6b7d | vest_blossom | #ffe2ee\npremium-neoprene-swim-vest-light-blue | #7cc6f2 | vest_azure | #dbeeff\npremium-neoprene-swim-vest-for-boys-1 | #1f4fc4 | vest_royal | #dbeeff\npremium-neoprene-swim-vest-for-boys | #1b2b55 | vest_navy | #dcf5ee\npremium-neoprene-swim-vest-pink-windmill | #d84bb2 | vest_windmill | #ebe5ff\npremium-neoprene-swim-vest-green | #8be33c | vest_green | #fff1bd\narm-bands-in-orange | #f7a21b | arm_orange | #fff1bd\narm-bands-in-purple | #6b5bd6 | arm_purple | #ebe5ff\narm-bands-in-pink | #f58bb4 | arm_pink | #ffe2ee\narm-bands-in-red | #e8392f | arm_red | #ffe2d3\nchildrens-armbands-in-yellow-with-navy-accent | #f5d90a | arm_yellow | #fff1bd\nchildrens-armbands-in-yellow-with-green-accent | #b6dd4a | arm_lemon | #dcf5ee\ngoggles-in-blue | #2d6fd6 | gog_blue.jpg | #dbeeff\ngoggles-in-pink | #f39bc8 | gog_pink.jpg | #ffe2ee"
+      },
+      "blocks": {
+        "signature": {
+          "type": "card",
+          "settings": {
+            "title": "Signature Swim Vest",
+            "products": [
+              "swim-vest-sunshine-blue-lim0021",
+              "swim-vest-sunset-blue-m-lim0022",
+              "swim-vest-berry-pink-lim0023",
+              "swim-vest-pink-daisy-lim0024"
+            ],
+            "image_fallback": "l_vests",
+            "tint": "#dbeeff",
+            "feature": "Integrated floats, YKK zip and two buckles",
+            "badge": "Signature",
+            "badge_dark": true,
+            "extra": ""
+          }
+        },
+        "classic": {
+          "type": "card",
+          "settings": {
+            "title": "Classic Swim Vest",
+            "products": [
+              "premium-neoprene-swim-vest-pink-leopard",
+              "premium-neoprene-swim-vest-for-girls",
+              "premium-neoprene-swim-vest-light-blue",
+              "premium-neoprene-swim-vest-for-boys-1",
+              "premium-neoprene-swim-vest-for-boys",
+              "premium-neoprene-swim-vest-pink-windmill",
+              "premium-neoprene-swim-vest-green"
+            ],
+            "image_fallback": "p_classic2",
+            "tint": "#ffe2ee",
+            "feature": "8 removable floats, take them out in pairs",
+            "badge": "Best seller",
+            "badge_dark": false,
+            "extra": ""
+          }
+        },
+        "armbands": {
+          "type": "card",
+          "settings": {
+            "title": "Arm Bands",
+            "products": [
+              "arm-bands-in-orange",
+              "arm-bands-in-purple",
+              "arm-bands-in-pink",
+              "arm-bands-in-red",
+              "childrens-armbands-in-yellow-with-navy-accent",
+              "childrens-armbands-in-yellow-with-green-accent"
+            ],
+            "image_fallback": "p_armbands",
+            "tint": "#fff1bd",
+            "feature": "Bright prints for first splashes",
+            "badge": "",
+            "badge_dark": false,
+            "extra": ""
+          }
+        },
+        "goggles": {
+          "type": "card",
+          "settings": {
+            "title": "Kids Swim Goggles",
+            "products": [
+              "goggles-in-blue",
+              "goggles-in-pink"
+            ],
+            "image_fallback": "p_goggles",
+            "tint": "#dbeeff",
+            "feature": "Sized for smaller faces",
+            "badge": "",
+            "badge_dark": false,
+            "extra": ""
+          }
+        },
+        "kidscap": {
+          "type": "card",
+          "settings": {
+            "title": "Kids Swim Cap",
+            "products": [
+              "kids-swim-caps"
+            ],
+            "image_fallback": "p_kidscap",
+            "tint": "#ffe2ee",
+            "feature": "100% silicone, one size",
+            "badge": "",
+            "badge_dark": false,
+            "extra": "6 colours"
+          }
+        },
+        "kidslh": {
+          "type": "card",
+          "settings": {
+            "title": "Kids Long Hair Swim Cap",
+            "products": [
+              "swim-caps-kids-long-hair"
+            ],
+            "image_fallback": "p_kidslh",
+            "tint": "#ffe2d3",
+            "feature": "Extra room for long hair",
+            "badge": "",
+            "badge_dark": false,
+            "extra": "7 colours"
+          }
+        },
+        "headband": {
+          "type": "card",
+          "settings": {
+            "title": "Swim Headband",
+            "products": [
+              "limmys-swimming-headband-for-kids-and-adults"
+            ],
+            "image_fallback": "p_headband_swim",
+            "tint": "#dcf5ee",
+            "feature": "Covers the ears, adjustable strap",
+            "badge": "",
+            "badge_dark": false,
+            "extra": "4 designs · S, M, L",
+            "hover_image_fallback": "p_headband_towel"
+          }
+        },
+        "adultcap": {
+          "type": "card",
+          "settings": {
+            "title": "Long Hair Swim Cap",
+            "products": [
+              "swim-caps-womens-long-hair"
+            ],
+            "image_fallback": "p_adultcap",
+            "tint": "#ebe5ff",
+            "feature": "For grown-ups with long hair",
+            "badge": "",
+            "badge_dark": false,
+            "extra": "More colours"
+          }
+        }
+      },
+      "block_order": [
+        "signature",
+        "classic",
+        "armbands",
+        "goggles",
+        "kidscap",
+        "kidslh",
+        "headband",
+        "adultcap"
+      ]
+    },
+    "waves": {
+      "type": "lv7-waves",
+      "settings": {},
+      "blocks": {
+        "blue": {
+          "type": "wave",
+          "settings": {
+            "title": "Blue Wave",
+            "text": "Ocean blues and sunny yellows. [count] pieces, from vests to goggles.",
+            "button": "Shop Blue Wave",
+            "collection": "blue",
+            "bg": "#e4eefa",
+            "wave": "#d3e3f6",
+            "image_1_fallback": "vest_navy",
+            "image_2_fallback": "vest_sunshine",
+            "image_3_fallback": "arm_yellow",
+            "image_4_fallback": "vest_royal"
+          }
+        },
+        "pink": {
+          "type": "wave",
+          "settings": {
+            "title": "Pink Wave",
+            "text": "Pinks, berries and florals. [count] pieces, from vests to goggles.",
+            "button": "Shop Pink Wave",
+            "collection": "pinks",
+            "bg": "#fbe8ef",
+            "wave": "#f6d6e2",
+            "image_1_fallback": "vest_leopard",
+            "image_2_fallback": "vest_berry",
+            "image_3_fallback": "arm_pink",
+            "image_4_fallback": "vest_daisy"
+          }
+        }
+      },
+      "block_order": [
+        "blue",
+        "pink"
+      ]
+    },
+    "spotlight": {
+      "type": "lv7-spotlight",
+      "settings": {
+        "products": [
+          "premium-neoprene-swim-vest-light-blue",
+          "premium-neoprene-swim-vest-for-girls",
+          "premium-neoprene-swim-vest-for-boys-1",
+          "premium-neoprene-swim-vest-for-boys",
+          "premium-neoprene-swim-vest-pink-leopard",
+          "premium-neoprene-swim-vest-pink-windmill",
+          "premium-neoprene-swim-vest-green"
+        ],
+        "size_link": "shopify://pages/size-chart-swim-vests-2-0",
+        "inset_fallback": "p_spot",
+        "swatches": "swim-vest-sunshine-blue-lim0021 | #f6c445 | vest_sunshine | #dbeeff\nswim-vest-sunset-blue-m-lim0022 | #f28a3b | vest_sunset | #ffe2d3\nswim-vest-berry-pink-lim0023 | #e04f9b | vest_berry | #ffe2ee\nswim-vest-pink-daisy-lim0024 | #f6b3cf | vest_daisy | #ebe5ff\npremium-neoprene-swim-vest-pink-leopard | #f0408a | vest_leopard | #ffe2ee\npremium-neoprene-swim-vest-for-girls | #ff6b7d | vest_blossom | #ffe2ee\npremium-neoprene-swim-vest-light-blue | #7cc6f2 | vest_azure | #dbeeff\npremium-neoprene-swim-vest-for-boys-1 | #1f4fc4 | vest_royal | #dbeeff\npremium-neoprene-swim-vest-for-boys | #1b2b55 | vest_navy | #dcf5ee\npremium-neoprene-swim-vest-pink-windmill | #d84bb2 | vest_windmill | #ebe5ff\npremium-neoprene-swim-vest-green | #8be33c | vest_green | #fff1bd\narm-bands-in-orange | #f7a21b | arm_orange | #fff1bd\narm-bands-in-purple | #6b5bd6 | arm_purple | #ebe5ff\narm-bands-in-pink | #f58bb4 | arm_pink | #ffe2ee\narm-bands-in-red | #e8392f | arm_red | #ffe2d3\nchildrens-armbands-in-yellow-with-navy-accent | #f5d90a | arm_yellow | #fff1bd\nchildrens-armbands-in-yellow-with-green-accent | #b6dd4a | arm_lemon | #dcf5ee\ngoggles-in-blue | #2d6fd6 | gog_blue.jpg | #dbeeff\ngoggles-in-pink | #f39bc8 | gog_pink.jpg | #ffe2ee"
+      },
+      "blocks": {
+        "c1": {
+          "type": "callout",
+          "settings": {
+            "title": "Grows with them",
+            "text": "8 removable floats. Take them out in pairs as skills build."
+          }
+        },
+        "c2": {
+          "type": "callout",
+          "settings": {
+            "title": "Sized by chest",
+            "text": "S, M and L for ages 2 to 9."
+          }
+        },
+        "c3": {
+          "type": "callout",
+          "settings": {
+            "title": "Soft neoprene",
+            "text": "UV-resistant and quick to dry."
+          }
+        },
+        "c4": {
+          "type": "callout",
+          "settings": {
+            "title": "Stays in place",
+            "text": "Under-body strap and adjustable fit."
+          }
+        }
+      },
+      "block_order": [
+        "c1",
+        "c2",
+        "c3",
+        "c4"
+      ]
+    },
+    "families": {
+      "type": "lv7-families",
+      "settings": {},
+      "blocks": {
+        "p1": {
+          "type": "photo",
+          "settings": {
+            "image_fallback": "m_splash",
+            "alt": "Four children splashing their feet at the pool edge in Limmys vests",
+            "tag": "Swim vests",
+            "link": "shopify://collections/all-swim-vests"
+          }
+        },
+        "p2": {
+          "type": "photo",
+          "settings": {
+            "image_fallback": "m_run",
+            "alt": "Two children running out of the sea in Signature vests",
+            "tag": "Signature Swim Vest",
+            "link": "shopify://collections/signature-collection"
+          }
+        },
+        "p3": {
+          "type": "photo",
+          "settings": {
+            "image_fallback": "m_mum",
+            "alt": "Girl in a Signature vest in the pool with her mum close by",
+            "tag": "Pink Daisy",
+            "link": "shopify://products/swim-vest-pink-daisy-lim0024"
+          }
+        },
+        "p4": {
+          "type": "photo",
+          "settings": {
+            "image_fallback": "m_rocks",
+            "alt": "Three children on a pebble beach in Limmys vests",
+            "tag": "Classic Swim Vest",
+            "link": "shopify://collections/swim-vests"
+          }
+        },
+        "p5": {
+          "type": "photo",
+          "settings": {
+            "image_fallback": "l_headband2",
+            "alt": "Two children on a beach towel wearing swim headbands",
+            "tag": "Swim headbands",
+            "link": "shopify://collections/headbands-for-kids-and-adults"
+          }
+        }
+      },
+      "block_order": [
+        "p1",
+        "p2",
+        "p3",
+        "p4",
+        "p5"
+      ]
+    },
+    "values": {
+      "type": "lv7-values",
+      "settings": {
+        "awards": "Mom's Choice Awards\nParents' Picks Awards\nMade For Mums Awards, Bronze\nLoved By Children Awards, Platinum\nVergleich.org: \"Very good\""
+      },
+      "blocks": {
+        "v1": {
+          "type": "value",
+          "settings": {
+            "icon": "floats",
+            "icon_bg": "#dbeeff",
+            "title": "Grows with their skills",
+            "text": "8 removable floats in the Classic vest. Take them out in pairs as confidence builds."
+          }
+        },
+        "v2": {
+          "type": "value",
+          "settings": {
+            "icon": "ruler",
+            "icon_bg": "#fff1bd",
+            "title": "Made to fit",
+            "text": "Sized by chest, not just age. Adjustable straps keep the vest where it should be.",
+            "link_label": "See the size guide",
+            "link": "shopify://pages/size-chart-swim-vests-2-0"
+          }
+        },
+        "v3": {
+          "type": "value",
+          "settings": {
+            "icon": "shield",
+            "icon_bg": "#dcf5ee",
+            "title": "Certified swimming aid",
+            "text": "Our swim vests are certified as a CE swimming aid to EN standards.",
+            "link_label": "View certificates",
+            "link": "shopify://pages/cerificates-awards"
+          }
+        },
+        "v4": {
+          "type": "value",
+          "settings": {
+            "icon": "bag",
+            "icon_bg": "#ffe2ee",
+            "title": "Kit for the whole swim bag",
+            "text": "Vests, arm bands, goggles and caps for kids, plus caps for the grown-ups."
+          }
+        }
+      },
+      "block_order": [
+        "v1",
+        "v2",
+        "v3",
+        "v4"
+      ]
+    },
+    "reviews": {
+      "type": "lv7-reviews",
+      "settings": {},
+      "blocks": {
+        "r1": {
+          "type": "review",
+          "settings": {
+            "product": "Classic Swim Vest",
+            "image_fallback": "l_classic"
+          }
+        },
+        "r2": {
+          "type": "review",
+          "settings": {
+            "product": "Arm Bands",
+            "image_fallback": "l_armbands"
+          }
+        },
+        "r3": {
+          "type": "review",
+          "settings": {
+            "product": "Kids Swim Cap",
+            "image_fallback": "l_kidscap"
+          }
+        }
+      },
+      "block_order": [
+        "r1",
+        "r2",
+        "r3"
+      ]
+    },
+    "club": {
+      "type": "lv7-club",
+      "settings": {
+        "image_fallback": "club"
+      }
+    },
+    "safety": {
+      "type": "lv7-safety",
+      "settings": {}
+    },
+    "footer": {
+      "type": "lv7-footer",
+      "settings": {
+        "logo_fallback": "logo.png",
+        "legal": "Privacy | /pages/privacy-policy\nTerms | /pages/terms-and-conditions\nReturns policy | /pages/returns-policy"
+      },
+      "blocks": {
+        "shop": {
+          "type": "column",
+          "settings": {
+            "heading": "Shop",
+            "links": "Swim vests | /collections/all-swim-vests\nArm bands | /collections/kids-arm-band\nSwim caps | /collections/swim-caps\nGoggles | /collections/kids-swim-goggles\nHeadbands | /collections/headbands-for-kids-and-adults\nGift card | /products/limmys-gift-card"
+          }
+        },
+        "help": {
+          "type": "column",
+          "settings": {
+            "heading": "Help",
+            "links": "Size guides | /pages/size-chart-swim-vests-2-0\nFAQs | /pages/faq\nDelivery | /pages/shipping-policy\nReturns | /pages/returns-policy\nContact | /pages/contact-us"
+          }
+        },
+        "about": {
+          "type": "column",
+          "settings": {
+            "heading": "About",
+            "links": "Our story | /pages/who-we-are\nCertificates and awards | /pages/cerificates-awards\nBlog | /blogs/articles\nWholesale | /pages/wholesale-inquiry"
+          }
+        }
+      },
+      "block_order": [
+        "shop",
+        "help",
+        "about"
+      ]
+    }
+  },
+  "order": [
+    "header",
+    "hero",
+    "categories",
+    "bestsellers",
+    "waves",
+    "spotlight",
+    "families",
+    "values",
+    "reviews",
+    "club",
+    "safety",
+    "footer"
+  ]
+}
