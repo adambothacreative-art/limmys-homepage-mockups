@@ -331,12 +331,12 @@
 </div>
 <script type="application/json" id="lv7-data">{
 {%- assign lv7_first = true -%}
-{%- assign lv7_cols = 'all-swim-vests,kids-arm-band,kids-swim-goggles' | split: ',' -%}
+{%- assign lv7_cols = 'all-swim-vests,kids-arm-band' | split: ',' -%}
 {%- for h in lv7_cols -%}{%- for p in collections[h].products -%}
 {%- unless lv7_first -%},{%- endunless -%}{%- assign lv7_first = false -%}
 {{ p.handle | json }}:{"url":{{ p.url | json }},"price":{{ p.price | money | strip_html | json }},"variants":[{%- for v in p.variants -%}{"id":{{ v.id }},"t":{{ v.title | json }},"a":{{ v.available | json }}}{%- unless forloop.last -%},{%- endunless -%}{%- endfor -%}]}
 {%- endfor -%}{%- endfor -%}
-{%- assign lv7_extra = 'kids-swim-caps,swim-caps-kids-long-hair,swim-caps-womens-long-hair,limmys-swimming-headband-for-kids-and-adults' | split: ',' -%}
+{%- assign lv7_extra = 'goggles-in-blue,goggles-in-pink,kids-swim-caps,swim-caps-kids-long-hair,swim-caps-womens-long-hair,limmys-swimming-headband-for-kids-and-adults' | split: ',' -%}
 {%- for h in lv7_extra -%}{%- assign p = all_products[h] -%}{%- if p.id -%}
 {%- unless lv7_first -%},{%- endunless -%}{%- assign lv7_first = false -%}
 {{ p.handle | json }}:{"url":{{ p.url | json }},"price":{{ p.price | money | strip_html | json }},"variants":[{%- for v in p.variants -%}{"id":{{ v.id }},"t":{{ v.title | json }},"a":{{ v.available | json }}}{%- unless forloop.last -%},{%- endunless -%}{%- endfor -%}]}
