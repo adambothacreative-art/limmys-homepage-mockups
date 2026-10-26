@@ -20,8 +20,8 @@
 
 
 <div class="utility"><div class="wrap">
-  <span class="l">United Kingdom · £ GBP</span>
-  <span class="msg" id="lv7-annMsg">Free UK delivery over <span>£70</span></span>
+  <span class="l">{{ localization.country.name }} · {{ cart.currency.symbol }} {{ cart.currency.iso_code }}</span>
+  <span class="msg" id="lv7-annMsg">Free UK delivery over <span>{{ settings.free_shipping_minimum_amount | times: 100 | money_without_trailing_zeros }}</span></span>
   <span class="r"><a href="/pages/faq">Help</a></span>
 </div></div>
 
@@ -49,10 +49,10 @@
   <div class="mega" id="lv7-mega-products" hidden>
     <div class="wrap">
       <div class="col"><div><h4>Swim aids</h4><ul>
-        <li><a href="/collections/all-swim-vests">All swim vests <small>11</small></a></li>
-        <li><a href="/collections/swim-vests">Classic swim vests <small>7</small></a></li>
-        <li><a href="/collections/signature-collection">Signature swim vests <small>4</small></a></li>
-        <li><a href="/collections/kids-arm-band">Arm bands <small>6</small></a></li></ul></div>
+        <li><a href="/collections/all-swim-vests">All swim vests <small>{{ collections['all-swim-vests'].products_count }}</small></a></li>
+        <li><a href="/collections/swim-vests">Classic swim vests <small>{{ collections['swim-vests'].products_count }}</small></a></li>
+        <li><a href="/collections/signature-collection">Signature swim vests <small>{{ collections['signature-collection'].products_count }}</small></a></li>
+        <li><a href="/collections/kids-arm-band">Arm bands <small>{{ collections['kids-arm-band'].products_count }}</small></a></li></ul></div>
         <div><h4>Coming soon</h4><ul><li><a href="#">Swim diapers</a></li><li><a href="#">Life jackets</a></li></ul></div></div>
       <div class="col"><div><h4>Swim accessories</h4><ul>
         <li><a href="/collections/swim-caps">Kids swim caps</a></li>
@@ -73,8 +73,8 @@
     <div class="wrap">
       <div class="col"><div><h4>Collections</h4><ul>
         <li><a href="/collections/best-sellers">Best sellers</a></li>
-        <li><a href="/collections/blue">Blue Wave <small>8</small></a></li>
-        <li><a href="/collections/pinks">Pink Wave <small>10</small></a></li></ul></div></div>
+        <li><a href="/collections/blue">Blue Wave <small>{{ collections['blue'].products_count }}</small></a></li>
+        <li><a href="/collections/pinks">Pink Wave <small>{{ collections['pinks'].products_count }}</small></a></li></ul></div></div>
       <div class="pics">
         <a class="pic" href="/collections/best-sellers"><img src="{{ 'lv7-m_splash.webp' | asset_url }}" alt="Four children splashing at the pool edge in Limmys swim vests"><span>Best sellers →</span></a>
         <a class="pic" href="/collections/blue" style="background:var(--blue-tint)"><img class="pk" src="{{ 'lv7-vest_sunshine.webp' | asset_url }}" alt="Sunshine Blue Signature swim vest"><span>Blue Wave →</span></a>
@@ -138,12 +138,12 @@
       <div><span class="eyebrow">Shop by category</span><h2>Kit for every stage of learning to swim</h2></div>
     </div>
     <div class="cats">
-      <a class="cat amz" href="/collections/swim-vests" style="background:rgb(236,231,255)"><div class="ph"><img src="{{ 'lv7-t_classic.webp' | asset_url }}" alt="Classic swim vests in Pink Blossom, Azure Blue and Royal Blue"></div><h3>Classic swim vests</h3><span class="meta">7 colours · £29.99</span></a>
-      <a class="cat amz" href="/collections/signature-collection" style="background:rgb(233,249,246)"><div class="ph"><img src="{{ 'lv7-t_signature.webp' | asset_url }}" alt="Signature swim vests in Pink Daisy, Sunshine Blue and Sunset Blue"></div><h3>New: Signature vests</h3><span class="meta">4 colours · £29.99</span></a>
-      <a class="cat amz" href="/collections/kids-arm-band" style="background:rgb(255,234,243)"><div class="ph"><img src="{{ 'lv7-t_armbands.webp' | asset_url }}" alt="Limmys arm bands in pink and yellow"></div><h3>Arm bands</h3><span class="meta">6 prints · £9.99</span></a>
-      <a class="cat amz" href="/collections/swim-caps" style="background:rgb(253,242,178)"><div class="ph"><img src="{{ 'lv7-t_caps.webp' | asset_url }}" alt="Limmys silicone swim caps in five colours"></div><h3>Swim caps</h3><span class="meta">Kids and grown-ups · from £8.99</span></a>
-      <a class="cat amz" href="/collections/kids-swim-goggles" style="background:rgb(207,237,248)"><div class="ph"><img src="{{ 'lv7-t_goggles.webp' | asset_url }}" alt="Kids swim goggles in pink and blue"></div><h3>Kids goggles</h3><span class="meta">2 colours · £9.99</span></a>
-      <a class="cat amz" href="/collections/headbands-for-kids-and-adults" style="background:rgb(220,245,238)"><div class="ph"><img src="{{ 'lv7-t_headbands.webp' | asset_url }}" alt="Four Limmys swim headbands"></div><h3>Swim headbands</h3><span class="meta">4 designs · £14.99</span></a>
+      <a class="cat amz" href="/collections/swim-vests" style="background:rgb(236,231,255)"><div class="ph"><img src="{{ 'lv7-t_classic.webp' | asset_url }}" alt="Classic swim vests in Pink Blossom, Azure Blue and Royal Blue"></div><h3>Classic swim vests</h3><span class="meta">{%- if collections['swim-vests'].products_count > 0 -%}{{ collections['swim-vests'].products_count }} colours · from {{ collections['swim-vests'].products | map: 'price' | sort | first | money }}{%- else -%}Coming soon{%- endif -%}</span></a>
+      <a class="cat amz" href="/collections/signature-collection" style="background:rgb(233,249,246)"><div class="ph"><img src="{{ 'lv7-t_signature.webp' | asset_url }}" alt="Signature swim vests in Pink Daisy, Sunshine Blue and Sunset Blue"></div><h3>New: Signature vests</h3><span class="meta">{%- if collections['signature-collection'].products_count > 0 -%}{{ collections['signature-collection'].products_count }} colours · from {{ collections['signature-collection'].products | map: 'price' | sort | first | money }}{%- else -%}Coming soon{%- endif -%}</span></a>
+      <a class="cat amz" href="/collections/kids-arm-band" style="background:rgb(255,234,243)"><div class="ph"><img src="{{ 'lv7-t_armbands.webp' | asset_url }}" alt="Limmys arm bands in pink and yellow"></div><h3>Arm bands</h3><span class="meta">{%- if collections['kids-arm-band'].products_count > 0 -%}{{ collections['kids-arm-band'].products_count }} prints · from {{ collections['kids-arm-band'].products | map: 'price' | sort | first | money }}{%- else -%}Coming soon{%- endif -%}</span></a>
+      <a class="cat amz" href="/collections/swim-caps" style="background:rgb(253,242,178)"><div class="ph"><img src="{{ 'lv7-t_caps.webp' | asset_url }}" alt="Limmys silicone swim caps in five colours"></div><h3>Swim caps</h3><span class="meta">Kids and grown-ups{%- if collections['swim-caps'].products_count > 0 %} · from {{ collections['swim-caps'].products | map: 'price' | sort | first | money }}{%- endif -%}</span></a>
+      <a class="cat amz" href="/collections/kids-swim-goggles" style="background:rgb(207,237,248)"><div class="ph"><img src="{{ 'lv7-t_goggles.webp' | asset_url }}" alt="Kids swim goggles in pink and blue"></div><h3>Kids goggles</h3><span class="meta">{%- if collections['kids-swim-goggles'].products_count > 0 -%}{{ collections['kids-swim-goggles'].products_count }} colours · from {{ collections['kids-swim-goggles'].products | map: 'price' | sort | first | money }}{%- else -%}Coming soon{%- endif -%}</span></a>
+      <a class="cat amz" href="/collections/headbands-for-kids-and-adults" style="background:rgb(220,245,238)"><div class="ph"><img src="{{ 'lv7-t_headbands.webp' | asset_url }}" alt="Four Limmys swim headbands"></div><h3>Swim headbands</h3><span class="meta">{%- if collections['headbands-for-kids-and-adults'].products_count > 0 -%}4 designs · {{ collections['headbands-for-kids-and-adults'].products.first.price | money }}{%- else -%}Coming soon{%- endif -%}</span></a>
     </div>
   </div>
 </section>
@@ -167,12 +167,12 @@
     <div class="waves">
       <a class="wave-tile blue" href="/collections/blue">
         <svg class="gfx wv"><use href="#wave"/></svg>
-        <div class="txt"><span class="eyebrow">Collection</span><h3>Blue Wave</h3><p>Ocean blues and sunny yellows. 8 pieces, from vests to goggles.</p><span class="btn solid">Shop Blue Wave</span></div>
+        <div class="txt"><span class="eyebrow">Collection</span><h3>Blue Wave</h3><p>Ocean blues and sunny yellows. {{ collections['blue'].products_count }} pieces, from vests to goggles.</p><span class="btn solid">Shop Blue Wave</span></div>
         <div class="pile"><img class="p i1" src="{{ 'lv7-vest_navy.webp' | asset_url }}" alt=""><img class="p i2" src="{{ 'lv7-vest_sunshine.webp' | asset_url }}" alt=""><img class="p i3" src="{{ 'lv7-arm_yellow.webp' | asset_url }}" alt=""><img class="p i4" src="{{ 'lv7-vest_royal.webp' | asset_url }}" alt=""></div>
       </a>
       <a class="wave-tile pinky" href="/collections/pinks">
         <svg class="gfx wv"><use href="#wave"/></svg>
-        <div class="txt"><span class="eyebrow">Collection</span><h3>Pink Wave</h3><p>Pinks, berries and florals. 10 pieces, from vests to goggles.</p><span class="btn solid">Shop Pink Wave</span></div>
+        <div class="txt"><span class="eyebrow">Collection</span><h3>Pink Wave</h3><p>Pinks, berries and florals. {{ collections['pinks'].products_count }} pieces, from vests to goggles.</p><span class="btn solid">Shop Pink Wave</span></div>
         <div class="pile"><img class="p i1" src="{{ 'lv7-vest_leopard.webp' | asset_url }}" alt=""><img class="p i2" src="{{ 'lv7-vest_berry.webp' | asset_url }}" alt=""><img class="p i3" src="{{ 'lv7-arm_pink.webp' | asset_url }}" alt=""><img class="p i4" src="{{ 'lv7-vest_daisy.webp' | asset_url }}" alt=""></div>
       </a>
     </div>
@@ -206,7 +206,7 @@
           <button type="button">M<small>3 to 6 yrs</small></button>
           <button type="button">L<small>6 to 9 yrs</small></button>
         </div>
-        <div style="display:flex;gap:14px;align-items:center;flex-wrap:wrap"><span class="price">£29.99</span><a class="link" href="/pages/size-chart-swim-vests-2-0">Find your size</a></div>
+        <div style="display:flex;gap:14px;align-items:center;flex-wrap:wrap"><span class="price">{{ all_products['premium-neoprene-swim-vest-light-blue'].price | money }}</span><a class="link" href="/pages/size-chart-swim-vests-2-0">Find your size</a></div>
         <div class="safety"><svg><use href="#shield"/></svg><span>A swimming aid to help children learn, not a life jacket. Always stay within arm's reach of your child in and around water.</span></div>
       </div>
     </div>

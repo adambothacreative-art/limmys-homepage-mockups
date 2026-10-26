@@ -23,7 +23,14 @@
     "Swim Headband": "limmys-swimming-headband-for-kids-and-adults", "Long Hair Swim Cap": "swim-caps-womens-long-hair"
   };
   function lv7Handle(p, c) { return HANDLE[p.name + "|" + (c && c.n)] || HANDLE[p.name]; }
-  function lv7Price(el, p, c) { var d = DATA[lv7Handle(p, c)]; if (d) el.querySelector(".price").textContent = d.price; }
+  // Price always comes from Shopify. If the product isn't available in this market (or not loaded yet),
+  // the card becomes a placeholder: "Coming soon", buttons disabled.
+  function lv7Price(el, p, c) {
+    var d = DATA[lv7Handle(p, c)], soon = !d || !d.variants.some(function (v) { return v.a; });
+    el.classList.toggle("soon", soon);
+    el.querySelector(".price").textContent = d ? (soon ? "Sold out" : d.price) : "Coming soon";
+    el.querySelectorAll(".add, .sizes button").forEach(function (b) { b.disabled = soon; });
+  }
   function lv7Wire(el, p, cur) {
     lv7Price(el, p, cur());
     var go = function () { var d = DATA[lv7Handle(p, cur())]; if (d) window.location.href = d.url; };
@@ -59,13 +66,13 @@
   })();
 
   var products = [
-    { name: "Signature Swim Vest", badge: "Signature", dark: true, price: "£29.99", feat: "Integrated floats, YKK zip and two buckles", vest: true, alt: "l_vests",
+    { name: "Signature Swim Vest", badge: "Signature", dark: true, feat: "Integrated floats, YKK zip and two buckles", vest: true, alt: "l_vests",
       colours: [
         { n: "Sunshine Blue", hex: "#f6c445", img: "vest_sunshine" },
         { n: "Sunset Blue", hex: "#f28a3b", img: "vest_sunset" },
         { n: "Berry Pink", hex: "#e04f9b", img: "vest_berry" },
         { n: "Pink Daisy", hex: "#f6b3cf", img: "vest_daisy" } ] },
-    { name: "Classic Swim Vest", badge: "Best seller", price: "£29.99", feat: "8 removable floats, take them out in pairs", vest: true, alt: "p_classic2",
+    { name: "Classic Swim Vest", badge: "Best seller", feat: "8 removable floats, take them out in pairs", vest: true, alt: "p_classic2",
       colours: [
         { n: "Pink Leopard", hex: "#f0408a", img: "vest_leopard" },
         { n: "Pink Blossom", hex: "#ff6b7d", img: "vest_blossom" },
@@ -74,7 +81,7 @@
         { n: "Navy Blue", hex: "#1b2b55", img: "vest_navy" },
         { n: "Pink Windmill", hex: "#d84bb2", img: "vest_windmill" },
         { n: "Neon Green", hex: "#8be33c", img: "vest_green" } ] },
-    { name: "Arm Bands", price: "£9.99", feat: "Bright prints for first splashes", alt: "p_armbands",
+    { name: "Arm Bands", feat: "Bright prints for first splashes", alt: "p_armbands",
       colours: [
         { n: "Orange", hex: "#f7a21b", img: "arm_orange" },
         { n: "Purple", hex: "#6b5bd6", img: "arm_purple" },
@@ -82,17 +89,17 @@
         { n: "Red", hex: "#e8392f", img: "arm_red" },
         { n: "Yellow", hex: "#f5d90a", img: "arm_yellow" },
         { n: "Lemon", hex: "#b6dd4a", img: "arm_lemon" } ] },
-    { name: "Kids Swim Goggles", price: "£9.99", feat: "Sized for smaller faces", model: true, alt: "p_goggles",
+    { name: "Kids Swim Goggles", feat: "Sized for smaller faces", model: true, alt: "p_goggles",
       colours: [
         { n: "Blue", hex: "#2d6fd6", img: "gog_blue.jpg" },
         { n: "Pink", hex: "#f39bc8", img: "gog_pink.jpg" } ] },
-    { name: "Kids Swim Cap", price: "£8.99", feat: "100% silicone, one size", more: "6 colours", cover: true,
+    { name: "Kids Swim Cap", feat: "100% silicone, one size", more: "6 colours", cover: true,
       colours: [ { n: "Pink", hex: "#ff7fb5", img: "p_kidscap" } ] },
-    { name: "Kids Long Hair Swim Cap", price: "£9.99", feat: "Extra room for long hair", more: "7 colours", cover: true,
+    { name: "Kids Long Hair Swim Cap", feat: "Extra room for long hair", more: "7 colours", cover: true,
       colours: [ { n: "Yellow", hex: "#f5d90a", img: "p_kidslh" } ] },
-    { name: "Swim Headband", price: "£14.99", feat: "Covers the ears, adjustable strap", more: "4 designs · S, M, L", cover: true, alt: "p_headband_towel",
+    { name: "Swim Headband", feat: "Covers the ears, adjustable strap", more: "4 designs · S, M, L", cover: true, alt: "p_headband_towel",
       colours: [ { n: "Pink Flowers", hex: "#f7b6d2", img: "p_headband_swim" } ] },
-    { name: "Long Hair Swim Cap", price: "£9.99", feat: "For grown-ups with long hair", more: "More colours", cover: true,
+    { name: "Long Hair Swim Cap", feat: "For grown-ups with long hair", more: "More colours", cover: true,
       colours: [ { n: "Black", hex: "#1d1d1f", img: "p_adultcap" } ] }
   ];
   function src(f) { return window.LV7A + "lv7-" + (f.indexOf(".") > -1 ? f : f + ".webp"); }
@@ -175,7 +182,7 @@
   drawer.querySelectorAll("a").forEach(function (l) { l.addEventListener("click", function () { drawer.hidden = true; menuBtn.setAttribute("aria-expanded", "false"); }); });
 
   // Rotating announcement
-  var msgs = ['Free UK delivery over <span>£70</span>', 'Award-winning swim aids', '30-day returns'], mi = 0, ann = document.getElementById("lv7-annMsg");
+  var msgs = [document.getElementById("lv7-annMsg").innerHTML, 'Award-winning swim aids', '30-day returns'], mi = 0, ann = document.getElementById("lv7-annMsg");
   if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) setInterval(function () { mi = (mi + 1) % msgs.length; ann.innerHTML = msgs[mi]; }, 3500);
 
   // Swim club (mockup only)

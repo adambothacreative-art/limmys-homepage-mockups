@@ -427,3 +427,7 @@
 .lv7 .card .ph img, .lv7 .cat .ph img, .lv7 .mega .pic img, .lv7 .tile img { border-radius: 0; }
 .lv7 input, .lv7 select { box-shadow: none; }
 .lv7 .note, .lv7 .review, .lv7 .open { display: none !important; }
+/* placeholder card: product not available in this market yet */
+.lv7 .card.soon .price { color: var(--muted); font-weight: 500; }
+.lv7 .card.soon .add, .lv7 .card.soon .sizes button { opacity: .45; cursor: not-allowed; }
+.lv7 .card.soon .ph { filter: grayscale(.35); }
