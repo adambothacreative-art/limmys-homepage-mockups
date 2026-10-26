@@ -453,11 +453,11 @@
             "title": "Stays in place",
             "text": "Under-body strap and adjustable fit.",
             "x": 84,
-            "y": 72,
+            "y": 74,
             "width": 170,
             "padding": 10,
             "pointer": "left",
-            "length": 64
+            "length": 104
           }
         }
       },
