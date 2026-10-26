@@ -3,19 +3,26 @@
 <section class="s">
   <div class="wrap">
     {%- assign plist = section.settings.products -%}
-    <div class="spot" data-card>
+    <div class="spot{% if section.settings.mobile_list %} mobile-list{% endif %}" data-card style="background: {{ section.settings.bg }}">
       <script type="application/json" data-products>[{%- for p in plist -%}{% render 'lv7-product-json', p: p, swatches: section.settings.swatches %}{%- unless forloop.last -%},{%- endunless -%}{%- endfor -%}]</script>
-      <svg class="gfx wv1" aria-hidden="true"><use href="#lv7-wave"/></svg>
-      <svg class="gfx wv2" aria-hidden="true"><use href="#lv7-wave"/></svg>
-      <svg class="gfx palm" aria-hidden="true"><use href="#lv7-palm"/></svg>
+      {%- if section.settings.show_waves -%}
+      <svg class="gfx wv1" aria-hidden="true" style="color: {{ section.settings.wave_1 }}"><use href="#lv7-wave"/></svg>
+      <svg class="gfx wv2" aria-hidden="true" style="color: {{ section.settings.wave_2 }}"><use href="#lv7-wave"/></svg>
+      {%- endif -%}
       <div class="spot-art">
-        <div class="disc"></div>
-        <img class="p" data-pack src="" alt="{{ section.settings.heading | escape }}">
-        {%- render 'lv7-img', image: section.settings.inset, fallback: section.settings.inset_fallback, alt: section.settings.inset_alt, cls: 'inset', width: 600 -%}
-        {%- for block in section.blocks limit: 4 -%}
-          <div class="callout co{{ forloop.index }}" {{ block.shopify_attributes }}><span class="dot"></span><b>{{ block.settings.title }}</b>{{ block.settings.text }}</div>
-        {%- endfor -%}
+        {%- if section.settings.show_disc -%}<div class="disc" style="left: {{ section.settings.disc_x }}%; top: {{ section.settings.disc_y }}%; width: {{ section.settings.disc_size }}%;"></div>{%- endif -%}
+        <img class="p sp-img" data-pack src="" alt="{{ section.settings.heading | escape }}" style="left: {{ section.settings.image_x }}%; top: {{ section.settings.image_y }}%; width: {{ section.settings.image_size }}%;">
+        {%- if section.settings.show_inset -%}
+          {%- capture icls -%}inset inset-{{ section.settings.inset_side }}{%- endcapture -%}
+          <div class="{{ icls }}" style="width: {{ section.settings.inset_size }}%;">{%- render 'lv7-img', image: section.settings.inset, fallback: section.settings.inset_fallback, alt: section.settings.inset_alt, width: 600 -%}</div>
+        {%- endif -%}
+        {%- for block in section.blocks -%}<div class="callout cv ptr-{{ block.settings.pointer }}" {{ block.shopify_attributes }}
+  style="left: {{ block.settings.x }}%; top: {{ block.settings.y }}%; width: {{ block.settings.width }}px; padding: {{ block.settings.padding }}px {{ block.settings.padding | plus: 4 }}px; --len: {{ block.settings.length }}px;">
+  {%- if block.settings.pointer != 'none' -%}<span class="ptr"></span>{%- endif -%}<b>{{ block.settings.title }}</b>{{ block.settings.text }}</div>{%- endfor -%}
       </div>
+      {%- if section.blocks.size > 0 -%}
+      <ul class="spot-list">{%- for block in section.blocks -%}<li><b>{{ block.settings.title }}</b>{{ block.settings.text }}</li>{%- endfor -%}</ul>
+      {%- endif -%}
       <div class="copy">
         {%- if section.settings.eyebrow != blank -%}<span class="eyebrow">{{ section.settings.eyebrow }}</span>{%- endif -%}
         <h2>{{ section.settings.heading }}</h2>
@@ -77,6 +84,140 @@
       "default": "A swimming aid to help children learn, not a life jacket. Always stay within arm's reach of your child in and around water."
     },
     {
+      "type": "header",
+      "content": "Colours"
+    },
+    {
+      "type": "color",
+      "id": "bg",
+      "label": "Background",
+      "default": "#dbeeff"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_waves",
+      "label": "Show waves",
+      "default": true
+    },
+    {
+      "type": "color",
+      "id": "wave_1",
+      "label": "Back wave",
+      "default": "#cdeee8"
+    },
+    {
+      "type": "color",
+      "id": "wave_2",
+      "label": "Front wave",
+      "default": "#c7e0fa"
+    },
+    {
+      "type": "header",
+      "content": "Product image"
+    },
+    {
+      "type": "range",
+      "id": "image_size",
+      "label": "Size",
+      "min": 20,
+      "max": 90,
+      "step": 1,
+      "unit": "%",
+      "default": 46
+    },
+    {
+      "type": "range",
+      "id": "image_x",
+      "label": "Left to right",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "%",
+      "default": 48
+    },
+    {
+      "type": "range",
+      "id": "image_y",
+      "label": "Top to bottom",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "%",
+      "default": 44
+    },
+    {
+      "type": "checkbox",
+      "id": "show_disc",
+      "label": "Show circle behind product",
+      "default": true
+    },
+    {
+      "type": "range",
+      "id": "disc_size",
+      "label": "Circle size",
+      "min": 20,
+      "max": 100,
+      "step": 1,
+      "unit": "%",
+      "default": 72
+    },
+    {
+      "type": "range",
+      "id": "disc_x",
+      "label": "Circle left to right",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "%",
+      "default": 48
+    },
+    {
+      "type": "range",
+      "id": "disc_y",
+      "label": "Circle top to bottom",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "%",
+      "default": 42
+    },
+    {
+      "type": "header",
+      "content": "Small photo"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_inset",
+      "label": "Show small photo",
+      "default": true
+    },
+    {
+      "type": "select",
+      "id": "inset_side",
+      "label": "Position",
+      "default": "left",
+      "options": [
+        {
+          "value": "left",
+          "label": "Bottom left"
+        },
+        {
+          "value": "right",
+          "label": "Bottom right"
+        }
+      ]
+    },
+    {
+      "type": "range",
+      "id": "inset_size",
+      "label": "Size",
+      "min": 15,
+      "max": 45,
+      "step": 1,
+      "unit": "%",
+      "default": 28
+    },
+    {
       "type": "image_picker",
       "id": "inset",
       "label": "Small photo"
@@ -94,14 +235,24 @@
       "default": "Boy by a pool wearing a Royal Blue Classic swim vest"
     },
     {
+      "type": "header",
+      "content": "Phones"
+    },
+    {
+      "type": "checkbox",
+      "id": "mobile_list",
+      "label": "Show callouts as a list under the product on phones",
+      "default": true
+    },
+    {
       "type": "textarea",
       "id": "swatches",
       "label": "Colour swatches",
-      "default": "swim-vest-sunshine-blue-lim0021 | #f6c445 | vest_sunshine | #dbeeff\nswim-vest-sunset-blue-m-lim0022 | #f28a3b | vest_sunset | #ffe2d3\nswim-vest-berry-pink-lim0023 | #e04f9b | vest_berry | #ffe2ee\nswim-vest-pink-daisy-lim0024 | #f6b3cf | vest_daisy | #ebe5ff\npremium-neoprene-swim-vest-pink-leopard | #f0408a | vest_leopard | #ffe2ee\npremium-neoprene-swim-vest-for-girls | #ff6b7d | vest_blossom | #ffe2ee\npremium-neoprene-swim-vest-light-blue | #7cc6f2 | vest_azure | #dbeeff\npremium-neoprene-swim-vest-for-boys-1 | #1f4fc4 | vest_royal | #dbeeff\npremium-neoprene-swim-vest-for-boys | #1b2b55 | vest_navy | #dcf5ee\npremium-neoprene-swim-vest-pink-windmill | #d84bb2 | vest_windmill | #ebe5ff\npremium-neoprene-swim-vest-green | #8be33c | vest_green | #fff1bd\narm-bands-in-orange | #f7a21b | arm_orange | #fff1bd\narm-bands-in-purple | #6b5bd6 | arm_purple | #ebe5ff\narm-bands-in-pink | #f58bb4 | arm_pink | #ffe2ee\narm-bands-in-red | #e8392f | arm_red | #ffe2d3\nchildrens-armbands-in-yellow-with-navy-accent | #f5d90a | arm_yellow | #fff1bd\nchildrens-armbands-in-yellow-with-green-accent | #b6dd4a | arm_lemon | #dcf5ee\ngoggles-in-blue | #2d6fd6 | gog_blue.jpg | #dbeeff\ngoggles-in-pink | #f39bc8 | gog_pink.jpg | #ffe2ee",
+      "default": "swim-vest-sunshine-blue-lim0021 | #7cc6f2, #f6c445 | vest_sunshine\nswim-vest-sunset-blue-m-lim0022 | #7cc6f2, #f28a3b | vest_sunset\nswim-vest-berry-pink-lim0023 | #e04f9b, #6b3fa0 | vest_berry\nswim-vest-pink-daisy-lim0024 | #f6b3cf, #6b3fa0 | vest_daisy\npremium-neoprene-swim-vest-pink-leopard | #f0408a, #6b5bd6 | vest_leopard\npremium-neoprene-swim-vest-for-girls | #ff6b7d, #1b2b55 | vest_blossom\npremium-neoprene-swim-vest-light-blue | #7cc6f2, #f6c445 | vest_azure\npremium-neoprene-swim-vest-for-boys-1 | #1f4fc4, #f6c445 | vest_royal\npremium-neoprene-swim-vest-for-boys | #1b2b55, #7cc6f2 | vest_navy\npremium-neoprene-swim-vest-pink-windmill | #d84bb2, #f6c445 | vest_windmill\npremium-neoprene-swim-vest-green | #8be33c, #1f4fc4 | vest_green\narm-bands-in-orange | #f7a21b, #2d6fd6\narm-bands-in-purple | #6b5bd6, #f58bb4\narm-bands-in-pink | #f58bb4\narm-bands-in-red | #e8392f, #f6c445\nchildrens-armbands-in-yellow-with-navy-accent | #f5d90a, #1b2b55\nchildrens-armbands-in-yellow-with-green-accent | #f5d90a, #8be33c\ngoggles-in-blue | #2d6fd6, #7cc6f2\ngoggles-in-pink | #f39bc8",
       "info": "Same format as the best sellers section."
     }
   ],
-  "max_blocks": 4,
+  "max_blocks": 6,
   "blocks": [
     {
       "type": "callout",
@@ -117,6 +268,84 @@
           "type": "text",
           "id": "text",
           "label": "Text"
+        },
+        {
+          "type": "range",
+          "id": "x",
+          "label": "Left to right",
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "unit": "%",
+          "default": 20
+        },
+        {
+          "type": "range",
+          "id": "y",
+          "label": "Top to bottom",
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "unit": "%",
+          "default": 20
+        },
+        {
+          "type": "range",
+          "id": "width",
+          "label": "Width",
+          "min": 120,
+          "max": 320,
+          "step": 10,
+          "unit": "px",
+          "default": 180
+        },
+        {
+          "type": "range",
+          "id": "padding",
+          "label": "Padding",
+          "min": 4,
+          "max": 24,
+          "step": 1,
+          "unit": "px",
+          "default": 10
+        },
+        {
+          "type": "select",
+          "id": "pointer",
+          "label": "Pointer",
+          "default": "right",
+          "options": [
+            {
+              "value": "right",
+              "label": "Right"
+            },
+            {
+              "value": "left",
+              "label": "Left"
+            },
+            {
+              "value": "top",
+              "label": "Top"
+            },
+            {
+              "value": "bottom",
+              "label": "Bottom"
+            },
+            {
+              "value": "none",
+              "label": "None"
+            }
+          ]
+        },
+        {
+          "type": "range",
+          "id": "length",
+          "label": "Pointer length",
+          "min": 0,
+          "max": 120,
+          "step": 2,
+          "unit": "px",
+          "default": 24
         }
       ]
     }

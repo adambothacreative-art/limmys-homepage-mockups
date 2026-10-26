@@ -1,6 +1,7 @@
 [
 "assets/lv7.css",
 "assets/lv7.js",
+"sections/lv7-app.liquid",
 "sections/lv7-bestsellers.liquid",
 "sections/lv7-categories.liquid",
 "sections/lv7-club.liquid",
@@ -8,7 +9,6 @@
 "sections/lv7-footer.liquid",
 "sections/lv7-header.liquid",
 "sections/lv7-hero.liquid",
-"sections/lv7-reviews.liquid",
 "sections/lv7-safety.liquid",
 "sections/lv7-spotlight.liquid",
 "sections/lv7-values.liquid",

@@ -1,0 +1,98 @@
+{% render 'lv7-head' %}
+<div class="lv7">
+<section class="s" style="padding-top: {{ section.settings.pad_top }}px; padding-bottom: {{ section.settings.pad_bottom }}px;">
+  <div class="wrap">
+    <div class="appwrap" style="background: {{ section.settings.bg }}">
+      {%- if section.settings.heading != blank or section.settings.show_summary -%}
+      <div class="rev-sum">
+        {%- if section.settings.show_summary -%}
+          <span class="big">{{ section.settings.rating }}</span>
+          <div><div class="stars">★★★★★</div><div class="rev-count">{{ section.settings.count_text }}</div></div>
+        {%- endif -%}
+        {%- if section.settings.heading != blank -%}<h2>{{ section.settings.heading }}</h2>{%- endif -%}
+      </div>
+      {%- endif -%}
+      <div class="app-slot">
+        {%- for block in section.blocks -%}
+          {%- case block.type -%}
+            {%- when '@app' -%}{% render block %}
+          {%- endcase -%}
+        {%- endfor -%}
+        {%- if section.blocks.size == 0 and request.design_mode -%}<p class="app-empty">Add an app block here, e.g. Judge.me reviews (Add block → Apps).</p>{%- endif -%}
+      </div>
+    </div>
+  </div>
+</section>
+</div>
+
+{% schema %}
+{
+  "name": "Limmys app block",
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "Holds app blocks such as Judge.me reviews, styled to match the Limmys sections."
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Loved by families worldwide"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_summary",
+      "label": "Show rating summary",
+      "default": false
+    },
+    {
+      "type": "text",
+      "id": "rating",
+      "label": "Rating",
+      "default": "4.8"
+    },
+    {
+      "type": "text",
+      "id": "count_text",
+      "label": "Count line",
+      "default": "from verified reviews"
+    },
+    {
+      "type": "color",
+      "id": "bg",
+      "label": "Background",
+      "default": "#dcf5ee"
+    },
+    {
+      "type": "range",
+      "id": "pad_top",
+      "label": "Space above",
+      "min": 0,
+      "max": 80,
+      "step": 4,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "pad_bottom",
+      "label": "Space below",
+      "min": 0,
+      "max": 80,
+      "step": 4,
+      "unit": "px",
+      "default": 64
+    }
+  ],
+  "blocks": [
+    {
+      "type": "@app"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Limmys app block"
+    }
+  ]
+}
+{% endschema %}

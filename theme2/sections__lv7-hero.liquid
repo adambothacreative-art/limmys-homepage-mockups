@@ -1,18 +1,26 @@
 {% render 'lv7-head' %}
+{%- liquid
+  assign op = section.settings.panel_opacity | divided_by: 100.0
+  assign panel_a = section.settings.panel_bg | color_modify: 'alpha', op
+  assign ov = section.settings.overlap | divided_by: 100.0
+  assign shade = section.settings.shade | divided_by: 100.0
+  assign shade_c = section.settings.panel_bg | color_modify: 'alpha', shade
+-%}
 <div class="lv7">
-<section class="hero6">
-  <div class="h6-photo">
+<section class="hero7{% unless section.settings.show_panel %} no-panel{% endunless %}"
+  style="--panel: {{ section.settings.panel_bg }}; --panel-a: {{ panel_a }}; --ov: {{ ov }}; --hc: {{ section.settings.heading_color }}; --tc: {{ section.settings.text_color }}; --ec: {{ section.settings.eyebrow_color }}; --shade-c: {{ shade_c }}; --pos: {{ section.settings.image_position }};">
+  <div class="h7-photo">
     {%- render 'lv7-img', image: section.settings.image, fallback: section.settings.image_fallback, alt: section.settings.image_alt, width: 2400, loading: 'eager' -%}
     {%- if section.settings.show_badge -%}<div class="badge-r"><span>{{ section.settings.badge_line_1 | newline_to_br }}<small>{{ section.settings.badge_line_2 }}</small></span></div>{%- endif -%}
   </div>
-  <div class="h6-panel">
-    <svg class="gfx palm"><use href="#lv7-palm"/></svg>
-    <svg class="h6-wave-m" viewBox="0 0 400 40" preserveAspectRatio="none" aria-hidden="true">
-      <path d="M0 22 C60 2 120 38 200 18 S330 4 400 20 V40 H0Z" fill="#f0f9fa"/>
-      <path d="M0 22 C60 2 120 38 200 18 S330 4 400 20" fill="none" stroke="#ffffff" stroke-width="6" vector-effect="non-scaling-stroke"/>
-      <path d="M0 15 C60 -5 120 31 200 11 S330 -3 400 13" fill="none" stroke="#1bbfa2" stroke-width="3" vector-effect="non-scaling-stroke"/>
+  {%- unless section.settings.show_panel -%}<div class="h7-shade"></div>{%- endunless -%}
+  <div class="h7-panel">
+    <svg class="h7-wave-m" viewBox="0 0 400 40" preserveAspectRatio="none" aria-hidden="true">
+      <path d="M0 22 C60 2 120 38 200 18 S330 4 400 20 V40 H0Z" fill="{{ section.settings.panel_bg }}"/>
+      <path d="M0 22 C60 2 120 38 200 18 S330 4 400 20" fill="none" stroke="{{ section.settings.line_1 }}" stroke-width="6" vector-effect="non-scaling-stroke"/>
+      <path d="M0 15 C60 -5 120 31 200 11 S330 -3 400 13" fill="none" stroke="{{ section.settings.line_2 }}" stroke-width="3" vector-effect="non-scaling-stroke"/>
     </svg>
-    <div class="h6-copy">
+    <div class="h7-copy">
       {%- if section.settings.eyebrow != blank -%}<span class="eyebrow">{{ section.settings.eyebrow }}</span>{%- endif -%}
       <h1>{{ section.settings.heading }}</h1>
       {%- if section.settings.text != blank -%}<p class="sub">{{ section.settings.text }}</p>{%- endif -%}
@@ -27,10 +35,12 @@
       </div>
     </div>
   </div>
-  <svg class="h6-lines" viewBox="0 0 84 480" preserveAspectRatio="none" aria-hidden="true">
-    <path d="M25 0C63 70 10 140 38 220S67 340 29 400S22 460 34 480" fill="none" stroke="#ffffff" stroke-width="5" vector-effect="non-scaling-stroke"/>
-    <path d="M36 0C74 70 21 140 49 220S78 340 40 400S33 460 45 480" fill="none" stroke="#1bbfa2" stroke-width="3" vector-effect="non-scaling-stroke"/>
+  {%- if section.settings.show_panel -%}
+  <svg class="h7-lines" viewBox="0 0 84 480" preserveAspectRatio="none" aria-hidden="true">
+    <path d="M25 0C63 70 10 140 38 220S67 340 29 400S22 460 34 480" fill="none" stroke="{{ section.settings.line_1 }}" stroke-width="5" vector-effect="non-scaling-stroke"/>
+    <path d="M36 0C74 70 21 140 49 220S78 340 40 400S33 460 45 480" fill="none" stroke="{{ section.settings.line_2 }}" stroke-width="3" vector-effect="non-scaling-stroke"/>
   </svg>
+  {%- endif -%}
 </section>
 </div>
 
@@ -38,6 +48,10 @@
 {
   "name": "Limmys hero",
   "settings": [
+    {
+      "type": "header",
+      "content": "Photo"
+    },
     {
       "type": "image_picker",
       "id": "image",
@@ -56,6 +70,89 @@
       "default": "Four children lying on a pebble beach by the sea in Limmys swim vests and arm bands"
     },
     {
+      "type": "select",
+      "id": "image_position",
+      "label": "Photo focus",
+      "default": "right center",
+      "options": [
+        {
+          "value": "left center",
+          "label": "Left"
+        },
+        {
+          "value": "center center",
+          "label": "Centre"
+        },
+        {
+          "value": "right center",
+          "label": "Right"
+        }
+      ]
+    },
+    {
+      "type": "header",
+      "content": "Text panel"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_panel",
+      "label": "Show text panel",
+      "default": true,
+      "info": "Off: the photo fills the whole banner and the text sits on the photo."
+    },
+    {
+      "type": "color",
+      "id": "panel_bg",
+      "label": "Panel colour",
+      "default": "#f0f9fa"
+    },
+    {
+      "type": "range",
+      "id": "panel_opacity",
+      "label": "Panel strength",
+      "min": 50,
+      "max": 100,
+      "step": 1,
+      "unit": "%",
+      "default": 96
+    },
+    {
+      "type": "range",
+      "id": "overlap",
+      "label": "Photo tucked under the panel",
+      "min": 0,
+      "max": 40,
+      "step": 1,
+      "unit": "%",
+      "default": 15
+    },
+    {
+      "type": "color",
+      "id": "line_1",
+      "label": "Wave line 1",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "line_2",
+      "label": "Wave line 2",
+      "default": "#1bbfa2"
+    },
+    {
+      "type": "range",
+      "id": "shade",
+      "label": "Shade behind text (panel off)",
+      "min": 0,
+      "max": 95,
+      "step": 5,
+      "unit": "%",
+      "default": 70
+    },
+    {
+      "type": "header",
+      "content": "Text"
+    },
+    {
       "type": "text",
       "id": "eyebrow",
       "label": "Small heading",
@@ -72,6 +169,24 @@
       "id": "text",
       "label": "Text",
       "default": "Swim vests, arm bands, caps and goggles for kids who are learning. Swim caps for the grown-ups swimming with them."
+    },
+    {
+      "type": "color",
+      "id": "eyebrow_color",
+      "label": "Small heading colour",
+      "default": "#0b7a68"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading colour",
+      "default": "#142f5f"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text colour",
+      "default": "#5a667c"
     },
     {
       "type": "text",

@@ -25,8 +25,12 @@
     assign cut_url = 'lv7-' | append: cf | asset_url
   endif
   assign img_url = ''
-  if p.featured_image
-    assign img_url = p.featured_image | image_url: width: 800
+  assign vimg = p.selected_or_first_available_variant.featured_image
+  if vimg == blank
+    assign vimg = p.featured_image
+  endif
+  if vimg
+    assign img_url = vimg | image_url: width: 900
   endif
 -%}
 {"h":{{ p.handle | json }},"u":{{ p.url | json }},"n":{{ colour | json }},"x":{{ sw_hex | json }},"c":{{ cut_url | json }},"t":{{ sw_tint | json }},"i":{{ img_url | json }},"pr":{{ p.price | money | strip_html | json }},"opt":{{ p.options.first | json }},"v":[{%- for v in p.variants -%}{"id":{{ v.id }},"t":{{ v.title | json }},"a":{{ v.available | json }}}{%- unless forloop.last -%},{%- endunless -%}{%- endfor -%}]}

@@ -17,9 +17,8 @@
         <article class="card" data-card {{ block.shopify_attributes }}>
           <script type="application/json" data-products>[{%- for p in plist -%}{% render 'lv7-product-json', p: p, swatches: section.settings.swatches %}{%- unless forloop.last -%},{%- endunless -%}{%- endfor -%}]</script>
           <div class="ph" data-ph style="background: {{ block.settings.tint }}">
-            <svg class="gfx palm"><use href="#lv7-palm"/></svg>
-            {%- if block.settings.badge != blank -%}<span class="badge{% if block.settings.badge_dark %} dark{% endif %}">{{ block.settings.badge }}</span>{%- endif -%}
-            <img class="p pk" data-pack src="" alt="{{ block.settings.title | escape }}">
+                        {%- if block.settings.badge != blank -%}<span class="badge{% if block.settings.badge_dark %} dark{% endif %}">{{ block.settings.badge }}</span>{%- endif -%}
+            <img class="p prod" data-pack src="" alt="{{ block.settings.title | escape }}">
             {%- if block.settings.image != blank or block.settings.image_fallback != blank -%}
               {%- render 'lv7-img', image: block.settings.image, fallback: block.settings.image_fallback, alt: block.settings.title, cls: 'life', width: 800 -%}
             {%- endif -%}
@@ -75,7 +74,7 @@
       "type": "textarea",
       "id": "swatches",
       "label": "Colour swatches",
-      "default": "swim-vest-sunshine-blue-lim0021 | #f6c445 | vest_sunshine | #dbeeff\nswim-vest-sunset-blue-m-lim0022 | #f28a3b | vest_sunset | #ffe2d3\nswim-vest-berry-pink-lim0023 | #e04f9b | vest_berry | #ffe2ee\nswim-vest-pink-daisy-lim0024 | #f6b3cf | vest_daisy | #ebe5ff\npremium-neoprene-swim-vest-pink-leopard | #f0408a | vest_leopard | #ffe2ee\npremium-neoprene-swim-vest-for-girls | #ff6b7d | vest_blossom | #ffe2ee\npremium-neoprene-swim-vest-light-blue | #7cc6f2 | vest_azure | #dbeeff\npremium-neoprene-swim-vest-for-boys-1 | #1f4fc4 | vest_royal | #dbeeff\npremium-neoprene-swim-vest-for-boys | #1b2b55 | vest_navy | #dcf5ee\npremium-neoprene-swim-vest-pink-windmill | #d84bb2 | vest_windmill | #ebe5ff\npremium-neoprene-swim-vest-green | #8be33c | vest_green | #fff1bd\narm-bands-in-orange | #f7a21b | arm_orange | #fff1bd\narm-bands-in-purple | #6b5bd6 | arm_purple | #ebe5ff\narm-bands-in-pink | #f58bb4 | arm_pink | #ffe2ee\narm-bands-in-red | #e8392f | arm_red | #ffe2d3\nchildrens-armbands-in-yellow-with-navy-accent | #f5d90a | arm_yellow | #fff1bd\nchildrens-armbands-in-yellow-with-green-accent | #b6dd4a | arm_lemon | #dcf5ee\ngoggles-in-blue | #2d6fd6 | gog_blue.jpg | #dbeeff\ngoggles-in-pink | #f39bc8 | gog_pink.jpg | #ffe2ee",
+      "default": "swim-vest-sunshine-blue-lim0021 | #7cc6f2, #f6c445 | vest_sunshine\nswim-vest-sunset-blue-m-lim0022 | #7cc6f2, #f28a3b | vest_sunset\nswim-vest-berry-pink-lim0023 | #e04f9b, #6b3fa0 | vest_berry\nswim-vest-pink-daisy-lim0024 | #f6b3cf, #6b3fa0 | vest_daisy\npremium-neoprene-swim-vest-pink-leopard | #f0408a, #6b5bd6 | vest_leopard\npremium-neoprene-swim-vest-for-girls | #ff6b7d, #1b2b55 | vest_blossom\npremium-neoprene-swim-vest-light-blue | #7cc6f2, #f6c445 | vest_azure\npremium-neoprene-swim-vest-for-boys-1 | #1f4fc4, #f6c445 | vest_royal\npremium-neoprene-swim-vest-for-boys | #1b2b55, #7cc6f2 | vest_navy\npremium-neoprene-swim-vest-pink-windmill | #d84bb2, #f6c445 | vest_windmill\npremium-neoprene-swim-vest-green | #8be33c, #1f4fc4 | vest_green\narm-bands-in-orange | #f7a21b, #2d6fd6\narm-bands-in-purple | #6b5bd6, #f58bb4\narm-bands-in-pink | #f58bb4\narm-bands-in-red | #e8392f, #f6c445\nchildrens-armbands-in-yellow-with-navy-accent | #f5d90a, #1b2b55\nchildrens-armbands-in-yellow-with-green-accent | #f5d90a, #8be33c\ngoggles-in-blue | #2d6fd6, #7cc6f2\ngoggles-in-pink | #f39bc8",
       "info": "One line per product: product-handle | swatch colour | built-in cut-out | card colour. Products not listed use their own photo and a grey dot."
     }
   ],

@@ -70,12 +70,12 @@
       cur = i;
       var d = data[i], avail = d.v.some(function (v) { return v.a; });
       if (pack) {
-        var src = d.c || d.i || "";
+        // cards show the product's own Shopify image; the spotlight uses the built-in cut-out when there is one
+        var src = isSpot ? (d.c || d.i || "") : (d.i || "");
         if (src) pack.src = src;
-        pack.classList.toggle("pk", !d.c);
+        if (isSpot) pack.classList.toggle("pk", !d.c);
         pack.alt = (title ? title + ", " : "") + d.n;
       }
-      if (ph && d.t && !isSpot) ph.style.background = d.t;
       if (picked) card.classList.add("picked");
       card.classList.toggle("soon", !avail);
       if (price) price.textContent = avail ? d.pr : "Sold out";
@@ -116,7 +116,9 @@
       sw.innerHTML = "";
       data.forEach(function (d, j) {
         var b = document.createElement("button");
-        b.type = "button"; b.className = "sw-btn"; b.style.background = d.x; b.setAttribute("aria-label", d.n);
+        b.type = "button"; b.className = "sw-btn"; b.setAttribute("aria-label", d.n);
+        var cols = String(d.x || "#c9d2df").split(",").map(function (c) { return c.trim(); }).filter(Boolean);
+        b.style.background = cols.length > 1 ? "linear-gradient(135deg, " + cols[0] + " 50%, " + cols[1] + " 50%)" : cols[0];
         b.addEventListener("click", function () { render(j, true); });
         sw.appendChild(b);
       });
