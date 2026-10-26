@@ -129,6 +129,7 @@
 .lv7 .spot-art { position: relative; z-index: 1; aspect-ratio: 1 / .96; min-width: 0; max-width: 100%; }
 .lv7 .spot-art .disc { position: absolute; width: 74%; aspect-ratio: 1; left: 9%; top: 5%; border-radius: 50%; background: var(--paper); }
 .lv7 .spot-art img.p { position: absolute; width: 50%; left: 21%; top: 5%; z-index: 2; }
+.lv7 .spot-art .inset { position: absolute; left: 0; bottom: 0; width: 30%; border-radius: 12px; border: 4px solid var(--paper); box-shadow: 0 10px 24px rgba(13,33,71,.18); z-index: 4; display: block; }
 .lv7 .spot .gfx.wv1 { left: 0; bottom: 0; width: 100%; height: 46%; color: #cdeee8; }
 .lv7 .spot .gfx.wv2 { left: 0; bottom: 0; width: 100%; height: 30%; color: #c7e0fa; transform: scaleX(-1); }
 .lv7 .callout { position: absolute; z-index: 3; background: var(--paper); border-radius: 12px; padding: 9px 13px; font-size: 14px; line-height: 1.3; max-width: 40%; box-shadow: 0 6px 18px rgba(20,47,95,.10); }
@@ -337,6 +338,7 @@
 .lv7 .hero7 { --pw: clamp(480px, calc((100vw - var(--wrap)) / 2 + 560px), 60vw); position: relative; overflow: hidden; height: clamp(420px, 34vw, 520px); background: var(--panel); }
 .lv7 .hero7 .h7-photo { position: absolute; top: 0; bottom: 0; right: 0; left: calc(var(--pw) * (1 - var(--ov))); }
 .lv7 .hero7.no-panel .h7-photo { left: 0; }
+.lv7 .hero7:not(.no-panel) .h7-photo { -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 calc(var(--pw) * var(--ov) + 2px)); mask-image: linear-gradient(90deg, transparent 0, #000 calc(var(--pw) * var(--ov) + 2px)); }
 .lv7 .hero7 .h7-photo img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: var(--pos); display: block; }
 .lv7 .hero7 .badge-r { right: max(16px, calc((100vw - var(--wrap)) / 2 + 16px)); top: 8%; }
 .lv7 .hero7 .h7-panel { position: absolute; top: 0; bottom: 0; left: 0; z-index: 2; width: calc(var(--pw) + 70px); background: var(--panel-a);
@@ -361,7 +363,7 @@
 }
 @media (max-width: 980px) {
 .lv7 .hero7 { height: auto; display: flex; flex-direction: column; }
-.lv7 .hero7 .h7-photo { position: relative; left: 0; height: 260px; }
+.lv7 .hero7 .h7-photo { position: relative; left: 0; height: 260px; -webkit-mask-image: none !important; mask-image: none !important; }
 .lv7 .hero7 .h7-panel { position: relative; width: 100%; -webkit-mask: none; mask: none; background: var(--panel); }
 .lv7 .hero7 .h7-lines, .lv7 .hero7 .h7-shade { display: none; }
 .lv7 .hero7 .h7-wave-m { display: block; position: absolute; left: 0; top: -38px; width: 100%; height: 40px; }
@@ -369,8 +371,10 @@
 
 }
 /* ---- spotlight: placeable product, circle, photo and callouts ---- */
-.lv7 .spot-art .disc { position: absolute; aspect-ratio: 1; border-radius: 50%; background: var(--paper); transform: translate(-50%, -50%); }
+.lv7 .spot-art .disc { display: block; position: absolute; height: auto; aspect-ratio: 1; border-radius: 50%; background: var(--paper); transform: translate(-50%, -50%); }
 .lv7 .spot-art img.sp-img { position: absolute; transform: translate(-50%, -50%); height: auto; max-width: none; z-index: 2; }
+.lv7 .spot-art .inset { position: absolute; bottom: 0; z-index: 4; border-radius: 12px; overflow: hidden; border: 4px solid var(--paper); box-shadow: 0 10px 24px rgba(13,33,71,.18); }
+.lv7 .spot-art .inset img { display: block; width: 100%; height: auto; }
 .lv7 .spot-art .inset-left { left: 0; }
 .lv7 .spot-art .inset-right { right: 0; }
 .lv7 .spot .callout.cv { position: absolute; transform: translate(-50%, -50%); max-width: none; z-index: 5; box-sizing: border-box; }
